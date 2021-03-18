@@ -1,9 +1,8 @@
-package com.example.naturesway.domain.serviceModels;
+package com.example.naturesway.domain.viewModels;
 
 import com.example.naturesway.domain.enumerations.AdventureCategoryEnum;
-import org.springframework.web.multipart.MultipartFile;
 
-public class AdventureServiceModel {
+public class AdventureViewModel {
     private String id;
     private String name;
     private AdventureCategoryEnum category;
@@ -15,7 +14,7 @@ public class AdventureServiceModel {
     private String description;
     private String imageUrl;
 
-    public AdventureServiceModel() {
+    public AdventureViewModel() {
     }
 
     public String getId() {

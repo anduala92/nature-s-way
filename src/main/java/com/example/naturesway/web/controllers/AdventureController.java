@@ -2,6 +2,7 @@ package com.example.naturesway.web.controllers;
 
 import com.example.naturesway.domain.binding.AdventureAddBindingModel;
 import com.example.naturesway.domain.serviceModels.AdventureServiceModel;
+import com.example.naturesway.domain.viewModels.AdventureViewModel;
 import com.example.naturesway.service.AdventureService;
 import com.example.naturesway.utils.CloudinaryService;
 import com.example.naturesway.web.annotations.PageTitle;
@@ -18,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/adventures")
@@ -37,13 +40,13 @@ public class AdventureController extends BaseController{
     @GetMapping("/add")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     @PageTitle("Add Adventure")
-    public ModelAndView addBicycle(@ModelAttribute(name = "model") AdventureAddBindingModel model) {
+    public ModelAndView addAdventure(@ModelAttribute(name = "model") AdventureAddBindingModel model) {
         return view("adventure/add-adventure");
     }
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
-    public ModelAndView addBicycleConform(@Valid @ModelAttribute(name = "model") AdventureAddBindingModel model,
+    public ModelAndView addAdventureConform(@Valid @ModelAttribute(name = "model") AdventureAddBindingModel model,
                                           BindingResult bindingResult) throws IOException, IllegalAccessException {
         if (bindingResult.hasErrors()){
             return view("adventure/add-adventure");
@@ -55,6 +58,20 @@ public class AdventureController extends BaseController{
         );
         adventureService.addAdventure(adventureServiceModel);
 
-        return redirect("/adventure/all");
+        return redirect("/adventures/all");
+    }
+
+
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    @PageTitle("All Adventures")
+    public ModelAndView allAdventures(ModelAndView modelAndView) {
+        List<AdventureViewModel> adventures = adventureService.findAll()
+                .stream()
+                .map(adventure -> mapper.map(adventure, AdventureViewModel.class))
+                .collect(Collectors.toList());
+        modelAndView.addObject("adventures", adventures);
+
+        return view("adventure/all-adventure", modelAndView);
     }
 }

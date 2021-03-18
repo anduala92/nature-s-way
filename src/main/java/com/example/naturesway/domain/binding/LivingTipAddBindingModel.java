@@ -1,25 +1,24 @@
-package com.example.naturesway.domain.entities;
+package com.example.naturesway.domain.binding;
 
 import com.example.naturesway.domain.enumerations.LivingTipEnum;
+import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "living_tips")
-public class LivingTip extends BaseEntity{
+public class LivingTipAddBindingModel {
     private String name;
     private LivingTipEnum category;
     private String description;
     private String usability;
 
-    public LivingTip() {
+    public LivingTipAddBindingModel() {
     }
 
-    @Column(name = "name")
+    //todo replace messages with static tets
     @NotNull
-    @Size(min = 3, max = 30)
+    @NotEmpty
+    @Length(min = 3, max = 30, message = "ggg")
     public String getName() {
         return name;
     }
@@ -28,9 +27,7 @@ public class LivingTip extends BaseEntity{
         this.name = name;
     }
 
-    @Column(name = "category")
     @NotNull
-    @Enumerated(EnumType.STRING)
     public LivingTipEnum getCategory() {
         return category;
     }
@@ -39,9 +36,9 @@ public class LivingTip extends BaseEntity{
         this.category = category;
     }
 
-    @Column(name = "description")
     @NotNull
-    @Size(min = 3)
+    @NotEmpty
+    @Length(min = 3, message = "ggg")
     public String getDescription() {
         return description;
     }
@@ -50,9 +47,9 @@ public class LivingTip extends BaseEntity{
         this.description = description;
     }
 
-    @Column(name = "usability")
     @NotNull
-    @Size(min = 3)
+    @NotEmpty
+    @Length(min = 3, message = "ggg")
     public String getUsability() {
         return usability;
     }

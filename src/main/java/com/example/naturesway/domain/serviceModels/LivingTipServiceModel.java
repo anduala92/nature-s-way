@@ -1,25 +1,16 @@
-package com.example.naturesway.domain.entities;
+package com.example.naturesway.domain.serviceModels;
 
 import com.example.naturesway.domain.enumerations.LivingTipEnum;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-@Entity
-@Table(name = "living_tips")
-public class LivingTip extends BaseEntity{
+public class LivingTipServiceModel {
     private String name;
     private LivingTipEnum category;
     private String description;
     private String usability;
 
-    public LivingTip() {
+    public LivingTipServiceModel() {
     }
 
-    @Column(name = "name")
-    @NotNull
-    @Size(min = 3, max = 30)
     public String getName() {
         return name;
     }
@@ -28,9 +19,6 @@ public class LivingTip extends BaseEntity{
         this.name = name;
     }
 
-    @Column(name = "category")
-    @NotNull
-    @Enumerated(EnumType.STRING)
     public LivingTipEnum getCategory() {
         return category;
     }
@@ -39,9 +27,6 @@ public class LivingTip extends BaseEntity{
         this.category = category;
     }
 
-    @Column(name = "description")
-    @NotNull
-    @Size(min = 3)
     public String getDescription() {
         return description;
     }
@@ -50,9 +35,6 @@ public class LivingTip extends BaseEntity{
         this.description = description;
     }
 
-    @Column(name = "usability")
-    @NotNull
-    @Size(min = 3)
     public String getUsability() {
         return usability;
     }
