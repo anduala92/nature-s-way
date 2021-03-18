@@ -1,0 +1,20 @@
+<th:block th:fragment>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark bottom-green-line">
+
+        <div class="navbar-toggler-right">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#userNav"
+                    aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <th:block sec:authorize="isAnonymous()">
+            <th:block th:include="~{fragments/nav-anonymous}"></th:block>
+        </th:block>
+
+        <!--    LOG IN USER-->
+        <th:block sec:authorize="isAuthenticated()">
+            <th:block th:include="~{fragments/nav-authenticated}"></th:block>
+        </th:block>
+    </nav>
+</th:block>

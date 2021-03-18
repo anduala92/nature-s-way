@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin']
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD="yes"
+      - MYSQL_DATABASE=spring_data_lab_db
+#use this command in terminal after configuration of the project: docker-compose -f docker-compose.yaml up

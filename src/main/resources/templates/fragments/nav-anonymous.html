@@ -1,0 +1,32 @@
+<th:block th:fregment>
+
+    <div class="navbar-header ml-3">
+        <a class="navbar-brand font-weight-bold mt-1" th:href="@{/}">
+            <img class="mb-1" th:src="@{/images/natures-way-logo.png}" th:width="35" th:height="32" alt="header logo"/>
+            Nature's Way
+        </a>
+    </div>
+    <div class="collapse navbar-collapse flex-column text-dark" id="userNav">
+        <ul class="navbar-nav w-100 px-3 justify-content-end">
+            <li class="nav-item active">
+                <a id="mute-video" class="nav-link" href="#">
+                    <img th:src="@{/images/music-logo.png}" th:width="17" th:height="19" alt="login logo"/>
+                    <span class="green-color font-weight-bolder">Music</span>
+                    <script th:src="@{/js/mute-unmute.js}"></script>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link g" th:href="@{/users/login}">
+                    <img th:src="@{/images/login-account-logo.png}" th:width="17" th:height="19" alt="login logo"/>
+                    <span class="green-color font-weight-bolder">Login</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/users/register}">
+                    <img class="mb-1" th:src="@{/images/register-account-logo.png}" th:width="18" th:height="18"
+                         alt="register logo"/><span class="green-color font-weight-bolder">Register</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</th:block>

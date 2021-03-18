@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+<body>
+<header>
+    <th:block th:include="~{fragments/navbar}"></th:block>
+</header>
+<main>
+    <div class="video-background-holder">
+        <video id="newVideo" playsinline autoplay loop>
+            <script th:src="@{/js/runProfileVideo.js}"></script>
+        </video>
+        <div class="video-background-content container h-75">
+            <div class="d-flex h-75 text-center align-items-center" th:object="${model}">
+                    <div class="container">
+                        <h1 class="green-color">My Profile</h1>
+                        <div style="background-color:rgba(151, 202, 46, 0.25);">
+                            <hr class="hr-5 bg-dark">
+                            <div class="row offset-sm-2">
+                                <h4 class="font-weight-bold text-dark">Username: <span class="font-weight-light font-weight-bold"
+                                                                                        th:text="*{username}"></span></h4>
+                            </div>
+                            <div class="row offset-sm-2">
+                                <h4 class="font-weight-bold text-dark">First Name: <span class="font-weight-light font-weight-bold"
+                                                                                          th:text="*{firstName}"></span></h4>
+                            </div>
+                            <div class="row offset-sm-2">
+                                <h4 class="font-weight-bold text-dark">Last Name: <span class="font-weight-light font-weight-bold"
+                                                                                         th:text="*{lastName}"></span></h4>
+                            </div>
+                            <div class="row offset-sm-2">
+                                <h4 class="font-weight-bold text-dark">Email: <span class="font-weight-light font-weight-bold"
+                                                                                     th:text="*{email}"></span></h4>
+                            </div>
+                            <hr class="hr-5 bg-dark">
+                        </div>
+                        <div>
+                            <a th:href="@{/users/edit-profile}" class="green-color">
+                                <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
+                                 font-weight-bold mb-2 green-color input-transparent">Edit Profile</button></a>
+
+                            <a th:href="@{/users/edit-change-password}" class="green-color">
+                                <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
+                                 font-weight-bold mb-2 green-color input-transparent">Change Password</button></a>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div class="fixed-bottom">
+    <th:block th:include="~{fragments/footer}"></th:block>
+</div>
+</body>
+</html>
