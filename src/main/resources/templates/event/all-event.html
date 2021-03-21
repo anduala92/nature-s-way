@@ -67,7 +67,7 @@
                                  font-weight-bold mb-2 green-color" data-dismiss="modal">Close
                                                 </button>
                                                 <form th:action="@{/events/delete/{id}(id=${event.id})}"
-                                                      th:method="patch">
+                                                      th:method="POST">
                                                     <button type="submit" class="btn btn-lg btn-dark btn-position btn-login text-uppercase
                                  font-weight-bold mb-2 green-color">Delete
                                                     </button>
