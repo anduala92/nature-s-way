@@ -34,6 +34,11 @@ public class AdventureServiceImpl implements AdventureService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void deleteAdventureById(String id) {
+        adventureRepository.deleteById(id);
+    }
+
     private AdventureServiceModel getAdventureServiceModel(Adventure adventure) {
         AdventureServiceModel serviceModel = mapper.map(adventure, AdventureServiceModel.class);
 

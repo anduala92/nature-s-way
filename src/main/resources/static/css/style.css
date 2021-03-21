@@ -47,6 +47,7 @@ The navbar toggle appears at this breakpoint */
     width: 100%;
     overflow: hidden;
 }
+
 .img-background-all-users{
     background: url("https://res.cloudinary.com/anduala/image/upload/c_scale,w_1989/v1615498719/wallpapers/DSC_0096_hiqipx.jpg");
     max-width: 100%;
@@ -58,10 +59,87 @@ The navbar toggle appears at this breakpoint */
     overflow: hidden;
 }
 
+.img-background-all-adventures{
+    background: url("https://res.cloudinary.com/anduala/image/upload/c_scale,w_1946/v1615498713/wallpapers/_DSC2679_qwehzz.jpg");
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+    height: calc(100vh - 72px);
+    min-height: 25rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+.img-background-all-living-tips{
+    background: url("https://res.cloudinary.com/anduala/image/upload/c_scale,w_1985/v1615498710/wallpapers/_DSC2441_t2mmx1.jpg");
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+    height: calc(100vh - 72px);
+    min-height: 25rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+.img-background-all-events{
+    background: url("https://res.cloudinary.com/anduala/image/upload/c_scale,w_1946/v1615498722/wallpapers/DSC_0025_00009_bf1nto.jpg");
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+    height: calc(100vh - 72px);
+    min-height: 25rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+.img-background-add-adventure{
+    background: url("https://res.cloudinary.com/anduala/image/upload/c_scale,w_2491/v1615496571/wallpapers/16979459757_63d27e96c2_o_o60szj.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.img-background-add-event{
+    background: url("https://res.cloudinary.com/anduala/image/upload/c_scale,w_1984/v1615496576/wallpapers/14143532271_ca485144ea_o_syozpu.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+    height: calc(100vh - 72px);
+    min-height: 25rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+.img-background-add-living-tip{
+    background: url("https://res.cloudinary.com/anduala/image/upload/c_scale,w_1989/v1615496571/wallpapers/Copy_of_11-19_jleh2b.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+    height: calc(100vh - 72px);
+    min-height: 25rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+.bottom-margin{
+    margin-bottom: 50px;
+}
+
 .edit-profile-margin{
     margin-left: 5%;
 }
 
+
+.modal-backdrop {
+    /* bug fix - no overlay */
+    display: none;
+}
 
 .video-background-holder video {
     position: absolute;
@@ -250,6 +328,10 @@ The navbar toggle appears at this breakpoint */
 
 .profile-transparent {
     opacity: 62%;
+}
+
+.add-record-layer-transparent {
+    opacity: 50%;
 }
 
 .all-users-transparent {

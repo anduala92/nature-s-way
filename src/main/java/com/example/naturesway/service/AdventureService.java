@@ -8,4 +8,6 @@ public interface AdventureService {
     void addAdventure(AdventureServiceModel adventureServiceModel);
 
     Collection<AdventureServiceModel> findAll();
+
+    void deleteAdventureById(java.lang.String id);
 }

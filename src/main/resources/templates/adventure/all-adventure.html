@@ -11,79 +11,94 @@
 <header>
     <th:block th:include="~{fragments/navbar}"></th:block>
 </header>
-<main class="mt-3">
-    <div class="container">
-        <h1 class="text-center text-dark">All Adventures</h1>
-        <hr class="hr-2 bg-dark">
-        <table class="table table-hover mx-auto text-center" id="table_id">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Country</th>
-                <th>Level</th>
-                <th>Tips</th>
-                <th>Required Equipment</th>
-                <th>Duration</th>
-                <th>Description</th>
-            </tr>
-            </thead>
-            <tbody>
-            <th:block th:each="adventure, iter : ${adventures}">
-                <tr>
-                    <td th:text="${iter.index + 1}"></td>
-                    <td>
-                        <a class="image-link" th:href="${adventure.imageUrl}">
-                            <img th:src="${adventure.imageUrl}" width="40" height="40"
-                                 alt="Bicycle">
-                        </a>
-                    </td>
-                    <td th:text="${adventure.name}"></td>
-                    <td th:text="${adventure.category}"></td>
-                    <td th:text="${adventure.country}"></td>
-                    <td th:text="${adventure.level}"></td>
-                    <td th:text="${adventure.tips}"></td>
-                    <td th:text="${adventure.requiredEquipment}"></td>
-                    <td th:text="${adventure.duration}"></td>
-                    <td th:text="${adventure.description}"></td>
+<main>
+    <div class="container img-background-all-adventures">
+        <h1 class="text-center green-color">All Adventures</h1>
+        <div class="bg-light all-users-transparent">
+            <hr class="hr-2 bg-light">
+            <div class="margin-table-all-users">
+                <table class="table table-hover mx-auto text-center" id="adventures_table_id">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Country</th>
+                        <th>Level</th>
+                        <th>Tips</th>
+                        <th>Required Equipment</th>
+                        <th>Duration</th>
+                        <th>Description</th>
+                        <th class="green-color">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="adventure, iter : ${adventures}">
+                        <tr>
+                            <td th:text="${iter.index + 1}"></td>
+                            <td>
+                                <a class="image-link" th:href="${adventure.imageUrl}">
+                                    <img th:src="${adventure.imageUrl}" width="40" height="40"
+                                         alt="Bicycle">
+                                </a>
+                            </td>
+                            <td th:text="${adventure.name}"></td>
+                            <td th:text="${adventure.category}"></td>
+                            <td th:text="${adventure.country}"></td>
+                            <td th:text="${adventure.level}"></td>
+                            <td th:text="${adventure.tips}"></td>
+                            <td th:text="${adventure.requiredEquipment}"></td>
+                            <td th:text="${adventure.duration}"></td>
+                            <td th:text="${adventure.description}"></td>
 
-                    <td>
-                        <a th:href="@{/adventures/details/{id}(id=${adventure.id})}"
-                           class="btn btn-secondary font-weight-bold text-white">Details</a>
-                        <a th:href="@{/adventures/edit/{id}(id=${adventure.id})}"
-                           class="btn btn-success font-weight-bold text-white">Edit</a>
-                        <a href="#" data-toggle="modal" th:data-target="'#adventureModal' + ${iter.index + 1}"
-                           class="btn btn-danger font-weight-bold text-white">Delete</a>
-                        <!-- Modal -->
-                        <div class="modal fade" th:id="'adventureModal' + ${iter.index + 1}"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Delete bicycle</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body"
-                                         th:text="'Are you sure you want to delete ' + ${adventure.name}">
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <form th:action="@{/adventures/delete/{id}(id=${adventure.id})}" th:method="patch" >
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
+                            <td>
+                                <a th:href="@{/adventures/details/{id}(id=${adventure.id})}">
+                                    <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
+                                 font-weight-bold mb-2 green-color">Details
+                                    </button>
+                                </a>
+                                <a th:href="@{/adventures/edit/{id}(id=${adventure.id})}">
+                                    <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
+                                 font-weight-bold mb-2 green-color">Edit
+                                    </button>
+                                </a>
+                                <a href="#" data-toggle="modal" th:data-target="'#adventureModal' + ${iter.index + 1}"
+                                   class="btn btn-lg btn-dark btn-position btn-login text-uppercase
+                                 font-weight-bold mb-2 green-color">Delete</a>
+                                <!-- Modal -->
+                                <div class="modal modal-backdrop" th:id="'adventureModal' + ${iter.index + 1}" tabindex="-1"
+                                     role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Delete Adventure</h5>
+                                            </div>
+                                            <div class="modal-body"
+                                                 th:text="'Are you sure you want to delete ' + ${adventure.name}">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-lg btn-dark btn-position btn-login text-uppercase
+                                 font-weight-bold mb-2 green-color" data-dismiss="modal">Close
+                                                </button>
+                                                <form th:action="@{/adventures/delete/{id}(id=${adventure.id})}"
+                                                      th:method="POST">
+                                                    <button type="submit" class="btn btn-lg btn-dark btn-position btn-login text-uppercase
+                                 font-weight-bold mb-2 green-color">Delete
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </th:block>
-            </tbody>
-        </table>
-        <hr class="hr-2 bg-dark">
+                            </td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+            <hr class="hr-2 bg-light">
+        </div>
     </div>
 </main>
 <div>
@@ -92,7 +107,7 @@
 </body>
 <script>
     $(document).ready(function () {
-        $('#table_id').DataTable();
+        $('#adventures_table_id').DataTable();
     });
 </script>
 <script>
@@ -106,7 +121,7 @@
 
                 duration: 300,
                 easing: 'ease-in-out',
-                opener: function(openerElement) {
+                opener: function (openerElement) {
                     return openerElement.is('img') ? openerElement : openerElement.find('img');
                 }
             }
