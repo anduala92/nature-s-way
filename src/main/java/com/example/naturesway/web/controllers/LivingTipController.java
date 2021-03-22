@@ -78,7 +78,7 @@ public class LivingTipController extends BaseController{
         return view("livingTip/edit-living-tip", modelAndView);
     }
 
-    @PostMapping("/edit/{id}")
+    @PatchMapping("/edit/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     public ModelAndView editConfirm(@PathVariable String id,
                                     @Valid @ModelAttribute(name = "livingTip") LivingTipAddBindingModel livingTipAddBindingModel,
@@ -92,7 +92,7 @@ public class LivingTipController extends BaseController{
         return redirect("/living-tips/all");
     }
 
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     public ModelAndView delete(@PathVariable String id){
         livingTipService.deleteLivingTipById(id);

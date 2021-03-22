@@ -14,7 +14,7 @@
         <div class="container w-75">
             <h1 class="text-center text-light">Add Event</h1>
             <form id="add-product-form" class="form mx-auto text-dark" th:action="@{/events/add}"
-                  th:method="post"
+                  th:method="POST"
                   enctype="multipart/form-data" th:object="${model}">
 
                 <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'text-danger'">

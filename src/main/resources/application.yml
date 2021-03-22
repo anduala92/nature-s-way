@@ -3,6 +3,10 @@ cloudinary:
   api-secret: kC5WgRrhF-rnK0hiOe7mtBuuZm8
   cloud-name: anduala
 spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     # Put here your user name

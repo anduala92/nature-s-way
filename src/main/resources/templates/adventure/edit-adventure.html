@@ -14,7 +14,7 @@
         <div class="container w-75">
             <h1 class="text-center text-light">Edit Event</h1>
 
-            <form class="form w-auto mx-auto text-light" th:action="@{/adventures/edit/{id}(id=*{id})}" th:method="POST"
+            <form class="form w-auto mx-auto text-light" th:action="@{/adventures/edit/{id}(id=*{id})}" th:method="PATCH"
                   th:object="${adventure}">
 
                 <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'text-danger'">

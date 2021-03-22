@@ -83,7 +83,7 @@ public class AdventureController extends BaseController{
         return view("adventure/edit-adventure", modelAndView);
     }
 
-    @PostMapping("/edit/{id}")
+    @PatchMapping("/edit/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     public ModelAndView editConfirm(@PathVariable String id,
                                     @Valid @ModelAttribute(name = "adventure") AdventureAddBindingModel adventureAddBindingModel,
@@ -98,7 +98,7 @@ public class AdventureController extends BaseController{
         return redirect("/adventures/all");
     }
 
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     public ModelAndView delete(@PathVariable String id){
         adventureService.deleteAdventureById(id);

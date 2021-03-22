@@ -76,7 +76,7 @@ public class EventController extends BaseController{
         return view("event/edit-event", modelAndView);
     }
 
-    @PostMapping("/edit/{id}")
+    @PatchMapping("/edit/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     public ModelAndView editConfirm(@PathVariable String id,
                                     @Valid @ModelAttribute(name = "event") EventBindingModel eventBindingModel,
@@ -90,7 +90,7 @@ public class EventController extends BaseController{
         return redirect("/events/all");
     }
 
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     public ModelAndView delete(@PathVariable String id){
         eventService.deleteEventById(id);

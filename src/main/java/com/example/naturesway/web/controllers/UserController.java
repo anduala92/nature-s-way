@@ -90,7 +90,8 @@ public class UserController extends BaseController{
         return view("user/edit-profile", modelAndView);
     }
 
-    @PostMapping("/edit-profile")
+    @PatchMapping
+            ("/edit-profile")
     @PreAuthorize("isAuthenticated()")
     public ModelAndView editProfileConfirm(@Valid @ModelAttribute(name = "model") UserEditBindingModel model,
                                            BindingResult bindingResult){
@@ -117,7 +118,7 @@ public class UserController extends BaseController{
         return view("user/edit-change-password", modelAndView);
     }
 
-    @PostMapping("/edit-change-password")
+    @PatchMapping("/edit-change-password")
     @PreAuthorize("isAuthenticated()")
     public ModelAndView editProfileConfirm(@Valid @ModelAttribute(name = "model") UserChangePasswordBindingModel model,
                                            BindingResult bindingResult){

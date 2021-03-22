@@ -12,7 +12,7 @@
 <main>
     <div class="d-flex text-center p-5 img-background-edit-profile-holder">
         <h1 class="green-color edit-profile-margin">Edit Profile</h1>
-        <form class="profile-edit-form-width mx-auto input-transparent" th:action="@{/users/edit-profile}" th:method="POST" th:object="${model}">
+        <form class="profile-edit-form-width mx-auto input-transparent" th:action="@{/users/edit-profile}" th:method="PATCH" th:object="${model}">
             <hr class="hr-2 bg-light">
 
             <div class="form-group">

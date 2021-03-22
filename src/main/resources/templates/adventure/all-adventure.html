@@ -78,7 +78,7 @@
                                  font-weight-bold mb-2 green-color" data-dismiss="modal">Close
                                                 </button>
                                                 <form th:action="@{/adventures/delete/{id}(id=${adventure.id})}"
-                                                      th:method="POST">
+                                                      th:method="DELETE">
                                                     <button type="submit" class="btn btn-lg btn-dark btn-position btn-login text-uppercase
                                  font-weight-bold mb-2 green-color">Delete
                                                     </button>
