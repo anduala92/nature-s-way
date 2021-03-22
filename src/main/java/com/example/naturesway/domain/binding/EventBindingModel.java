@@ -9,12 +9,21 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class EventBindingModel {
+    private String id;
     private String name;
     private Date eventDate;
     private String location;
     private String programme;
 
     public EventBindingModel() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @NotNull

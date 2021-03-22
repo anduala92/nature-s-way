@@ -9,4 +9,10 @@ public interface LivingTipService {
     void addLivingTip(LivingTipServiceModel livingTipServiceModel);
 
     List<LivingTipServiceModel> findAll();
+
+    void deleteLivingTipById(String id);
+
+    LivingTipServiceModel findById(String id);
+
+    void editById(String id, LivingTipServiceModel livingTipServiceModel);
 }

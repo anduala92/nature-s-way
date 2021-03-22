@@ -17,7 +17,7 @@
         <div class="bg-light all-users-transparent">
             <hr class="hr-2 bg-light">
             <div class="margin-table-all-users">
-                <table class="table table-hover mx-auto text-center" id="adventures_table_id">
+                <table class="table table-hover mx-auto text-center" id="adventures_">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -53,11 +53,6 @@
                             <td th:text="${adventure.description}"></td>
 
                             <td>
-                                <a th:href="@{/adventures/details/{id}(id=${adventure.id})}">
-                                    <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
-                                 font-weight-bold mb-2 green-color">Details
-                                    </button>
-                                </a>
                                 <a th:href="@{/adventures/edit/{id}(id=${adventure.id})}">
                                     <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
                                  font-weight-bold mb-2 green-color">Edit
@@ -83,7 +78,7 @@
                                  font-weight-bold mb-2 green-color" data-dismiss="modal">Close
                                                 </button>
                                                 <form th:action="@{/adventures/delete/{id}(id=${adventure.id})}"
-                                                      th:method="patch">
+                                                      th:method="POST">
                                                     <button type="submit" class="btn btn-lg btn-dark btn-position btn-login text-uppercase
                                  font-weight-bold mb-2 green-color">Delete
                                                     </button>

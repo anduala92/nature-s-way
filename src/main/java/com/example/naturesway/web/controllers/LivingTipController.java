@@ -1,7 +1,9 @@
 package com.example.naturesway.web.controllers;
 
+import com.example.naturesway.domain.binding.EventBindingModel;
 import com.example.naturesway.domain.binding.LivingTipAddBindingModel;
 import com.example.naturesway.domain.serviceModels.AdventureServiceModel;
+import com.example.naturesway.domain.serviceModels.EventServiceModel;
 import com.example.naturesway.domain.serviceModels.LivingTipServiceModel;
 import com.example.naturesway.domain.viewModels.AdventureViewModel;
 import com.example.naturesway.domain.viewModels.LivingTipViewModel;
@@ -12,10 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -66,5 +65,37 @@ public class LivingTipController extends BaseController{
         modelAndView.addObject("livingTips", livingTips);
 
         return view("livingTip/all-living-tip", modelAndView);
+    }
+
+    @GetMapping("/edit/{id}")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    @PageTitle("Edit Living Tip")
+    public ModelAndView edit(@PathVariable String id, ModelAndView modelAndView){
+        LivingTipServiceModel livingTipServiceModel = livingTipService.findById(id);
+
+        modelAndView.addObject("livingTip", mapper.map(livingTipServiceModel, LivingTipAddBindingModel.class));
+
+        return view("livingTip/edit-living-tip", modelAndView);
+    }
+
+    @PostMapping("/edit/{id}")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    public ModelAndView editConfirm(@PathVariable String id,
+                                    @Valid @ModelAttribute(name = "livingTip") LivingTipAddBindingModel livingTipAddBindingModel,
+                                    BindingResult bindingResult,
+                                    ModelAndView modelAndView){
+        if (bindingResult.hasErrors()){
+            return view("livingTip/edit-living-tip", modelAndView);
+        }
+        LivingTipServiceModel livingTipServiceModel = mapper.map(livingTipAddBindingModel, LivingTipServiceModel.class);
+        livingTipService.editById(id, livingTipServiceModel);
+        return redirect("/living-tips/all");
+    }
+
+    @PostMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    public ModelAndView delete(@PathVariable String id){
+        livingTipService.deleteLivingTipById(id);
+        return redirect("/living-tips/all");
     }
 }

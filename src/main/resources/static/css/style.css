@@ -59,6 +59,17 @@ The navbar toggle appears at this breakpoint */
     overflow: hidden;
 }
 
+.img-background-all-users-delete{
+    background: url("https://res.cloudinary.com/anduala/image/upload/v1616375807/wallpapers/butterfly-laptop-wallpaper_ryhwwa.jpg");
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+    height: calc(100vh - 72px);
+    min-height: 25rem;
+    width: 100%;
+    overflow: hidden;
+}
+
 .img-background-all-adventures{
     background: url("https://res.cloudinary.com/anduala/image/upload/c_scale,w_1946/v1615498713/wallpapers/_DSC2679_qwehzz.jpg");
     max-width: 100%;

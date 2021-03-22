@@ -7,6 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class LivingTipAddBindingModel {
+    private String id;
     private String name;
     private LivingTipEnum category;
     private String description;
@@ -15,7 +16,15 @@ public class LivingTipAddBindingModel {
     public LivingTipAddBindingModel() {
     }
 
-    //todo replace messages with static tets
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    //todo replace messages with static texts
     @NotNull
     @NotEmpty
     @Length(min = 3, max = 30, message = "ggg")

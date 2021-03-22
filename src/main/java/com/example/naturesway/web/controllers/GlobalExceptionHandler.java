@@ -18,7 +18,7 @@ public class GlobalExceptionHandler {
         return fillModelAndView(Integer.parseInt(e.getCause().getMessage()), e.getMessage());
     }
 
-    @ExceptionHandler({BicycleNotFoundException.class,
+    @ExceptionHandler({RecordNotFoundException.class,
             UserNotFoundException.class,
             AuthorityNotFoundException.class,
             BicycleSizeNotFoundException.class,

@@ -123,22 +123,4 @@
     <th:block th:include="~{fragments/footer}"></th:block>
 </div>
 </body>
-<script>
-    fetch('/categories/fetch')
-        .then((response) => response.json())
-        .then((json) => {
-            json.forEach((category) => $('#add-bicycle-category')
-                .append(`<option value="${category.id}">${category.name}</option>`));
-            })
-        .catch((err) => console.log(err));
-</script>
-<script>
-    fetch('/sizes/fetch')
-        .then((response) => response.json())
-    .then((json) => {
-        json.forEach((size) => $('#add-bicycle-sizes')
-            .append(`<option value="${size.id}">${size.name}</option>`));
-    })
-    .catch((err) => console.log(err));
-</script>
 </html>

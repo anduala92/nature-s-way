@@ -35,12 +35,7 @@
                             <td th:text="${livingTip.description}"></td>
                             <td th:text="${livingTip.usability}"></td>
                             <td>
-                                <a th:href="@{/livingTips/details/{id}(id=${livingTip.id})}">
-                                    <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
-                                 font-weight-bold mb-2 green-color">Details
-                                    </button>
-                                </a>
-                                <a th:href="@{/livingTips/edit/{id}(id=${livingTip.id})}">
+                                <a th:href="@{/living-tips/edit/{id}(id=${livingTip.id})}">
                                     <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
                                  font-weight-bold mb-2 green-color">Edit
                                     </button>
@@ -55,7 +50,7 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Delete Living Tip</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">Delete Livint Tip</h5>
                                             </div>
                                             <div class="modal-body"
                                                  th:text="'Are you sure you want to delete ' + ${livingTip.name}">
@@ -64,7 +59,7 @@
                                                 <button type="button" class="btn btn-lg btn-dark btn-position btn-login text-uppercase
                                  font-weight-bold mb-2 green-color" data-dismiss="modal">Close
                                                 </button>
-                                                <form th:action="@{/livingTIps/delete/{id}(id=${livingTip.id})}"
+                                                <form th:action="@{/living-tips/delete/{id}(id=${livingTip.id})}"
                                                       th:method="POST">
                                                     <button type="submit" class="btn btn-lg btn-dark btn-position btn-login text-uppercase
                                  font-weight-bold mb-2 green-color">Delete

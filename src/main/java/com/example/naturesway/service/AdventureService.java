@@ -10,4 +10,8 @@ public interface AdventureService {
     Collection<AdventureServiceModel> findAll();
 
     void deleteAdventureById(java.lang.String id);
+
+    AdventureServiceModel findById(String id);
+
+    void editById(String id, AdventureServiceModel adventureServiceModel);
 }

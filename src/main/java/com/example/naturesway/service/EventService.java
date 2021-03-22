@@ -9,4 +9,10 @@ public interface EventService {
     void addEvent(EventServiceModel eventServiceModel);
 
     List<EventServiceModel> findAll();
+
+    void deleteEventById(String id);
+
+    EventServiceModel findById(String id);
+
+    void editById(String id, EventServiceModel eventServiceModel);
 }

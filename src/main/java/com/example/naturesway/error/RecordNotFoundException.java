@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.BAD_REQUEST, reason = "Invalid bicycle id")
-public class BicycleNotFoundException extends BaseException {
+public class RecordNotFoundException extends BaseException {
 
-    public BicycleNotFoundException(String message) {
+    public RecordNotFoundException(String message) {
         super(HttpStatus.BAD_REQUEST.value(), message);
     }
 }

@@ -1,7 +1,9 @@
 package com.example.naturesway.web.controllers;
 
 import com.example.naturesway.domain.binding.AdventureAddBindingModel;
+import com.example.naturesway.domain.binding.LivingTipAddBindingModel;
 import com.example.naturesway.domain.serviceModels.AdventureServiceModel;
+import com.example.naturesway.domain.serviceModels.LivingTipServiceModel;
 import com.example.naturesway.domain.viewModels.AdventureViewModel;
 import com.example.naturesway.service.AdventureService;
 import com.example.naturesway.utils.CloudinaryService;
@@ -70,6 +72,30 @@ public class AdventureController extends BaseController{
         modelAndView.addObject("adventures", adventures);
 
         return view("adventure/all-adventure", modelAndView);
+    }
+
+    @GetMapping("/edit/{id}")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    @PageTitle("Edit Adventure")
+    public ModelAndView edit(@PathVariable String id, ModelAndView modelAndView){
+        AdventureServiceModel adventureServiceModel = adventureService.findById(id);
+        modelAndView.addObject("adventure", mapper.map(adventureServiceModel, AdventureAddBindingModel.class));
+        return view("adventure/edit-adventure", modelAndView);
+    }
+
+    @PostMapping("/edit/{id}")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    public ModelAndView editConfirm(@PathVariable String id,
+                                    @Valid @ModelAttribute(name = "adventure") AdventureAddBindingModel adventureAddBindingModel,
+                                    BindingResult bindingResult,
+                                    ModelAndView modelAndView) throws IOException, IllegalAccessException {
+        if (bindingResult.hasErrors()){
+            return view("adventure/edit-adventure", modelAndView);
+        }
+        AdventureServiceModel adventureServiceModel = mapper.map(adventureAddBindingModel, AdventureServiceModel.class);
+
+        adventureService.editById(id, adventureServiceModel);
+        return redirect("/adventures/all");
     }
 
     @PostMapping("/delete/{id}")

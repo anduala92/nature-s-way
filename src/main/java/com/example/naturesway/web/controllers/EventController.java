@@ -12,10 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -66,5 +63,37 @@ public class EventController extends BaseController{
         modelAndView.addObject("events", events);
 
         return view("event/all-event", modelAndView);
+    }
+
+    @GetMapping("/edit/{id}")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    @PageTitle("Edit Event")
+    public ModelAndView edit(@PathVariable String id, ModelAndView modelAndView){
+        EventServiceModel eventServiceModel = eventService.findById(id);
+
+        modelAndView.addObject("event", mapper.map(eventServiceModel,EventBindingModel.class));
+
+        return view("event/edit-event", modelAndView);
+    }
+
+    @PostMapping("/edit/{id}")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    public ModelAndView editConfirm(@PathVariable String id,
+                                    @Valid @ModelAttribute(name = "event") EventBindingModel eventBindingModel,
+                                    BindingResult bindingResult,
+                                    ModelAndView modelAndView){
+        if (bindingResult.hasErrors()){
+            return view("event/edit-event", modelAndView);
+        }
+        EventServiceModel eventServiceModel = mapper.map(eventBindingModel, EventServiceModel.class);
+        eventService.editById(id, eventServiceModel);
+        return redirect("/events/all");
+    }
+
+    @PostMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    public ModelAndView delete(@PathVariable String id){
+        eventService.deleteEventById(id);
+        return redirect("/events/all");
     }
 }

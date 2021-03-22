@@ -156,6 +156,24 @@ public class UserController extends BaseController{
         return view("user/all-users", modelAndView);
     }
 
+    @GetMapping("/all-delete")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PageTitle("All Users")
+    public ModelAndView allDeleteUsers(ModelAndView modelAndView){
+        List<UserAllViewModel> users = userService.findAll()
+                .stream()
+                .map(u -> {
+                    UserAllViewModel user = mapper.map(u, UserAllViewModel.class);
+                    Set<String> authorities = getAuthoritiesToString(u);
+                    user.setAuthorities(authorities);
+                    return user;
+                })
+                .collect(Collectors.toList());
+
+        modelAndView.addObject("users", users);
+        return view("user/all-delete-users", modelAndView);
+    }
+
     @PostMapping("/set-user/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ModelAndView setUser(@PathVariable String id) {
@@ -177,6 +195,13 @@ public class UserController extends BaseController{
     public ModelAndView setAdmin(@PathVariable String id) {
         userService.setUserRole(id, "admin");
 
+        return redirect("/users/all");
+    }
+
+    @PostMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    public ModelAndView delete(@PathVariable String id){
+        userService.deleteUserById(id);
         return redirect("/users/all");
     }
 

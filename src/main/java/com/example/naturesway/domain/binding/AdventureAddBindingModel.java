@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class AdventureAddBindingModel {
+    private String id;
     private String name;
     private AdventureCategoryEnum category;
     private String country;
@@ -22,6 +23,14 @@ public class AdventureAddBindingModel {
 
 
     public AdventureAddBindingModel() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     //todo replace messages with static tets

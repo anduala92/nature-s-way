@@ -11,7 +11,6 @@
 </header>
 <main>
     <div class="img-background-add-living-tip">
-        <div class="bg-dark add-record-layer-transparent"></div>
         <div class="container w-75">
             <h1 class="text-center text-light">Add Living Tip</h1>
             <form id="add-product-form" class="form mx-auto text-light" th:action="@{/living-tips/add}"
@@ -69,22 +68,4 @@
     <th:block th:include="~{fragments/footer}"></th:block>
 </div>
 </body>
-<script>
-    fetch('/categories/fetch')
-        .then((response) => response.json())
-        .then((json) => {
-            json.forEach((category) => $('#add-bicycle-category')
-                .append(`<option value="${category.id}">${category.name}</option>`));
-        })
-        .catch((err) => console.log(err));
-</script>
-<script>
-    fetch('/sizes/fetch')
-        .then((response) => response.json())
-        .then((json) => {
-            json.forEach((size) => $('#add-bicycle-sizes')
-                .append(`<option value="${size.id}">${size.name}</option>`));
-        })
-        .catch((err) => console.log(err));
-</script>
 </html>

@@ -118,6 +118,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void deleteUserById(String id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository
                 .findByUsername(username)

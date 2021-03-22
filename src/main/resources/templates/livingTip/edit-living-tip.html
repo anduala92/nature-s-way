@@ -10,27 +10,64 @@
     <th:block th:include="~{fragments/navbar}"></th:block>
 </header>
 <main>
-    <div class="jumbotron">
-        <div class="container w-25">
-            <h1 class="text-center text-dark">Edit Category</h1>
-            <hr class="hr-2 bg-dark">
-            <form class="form mx-auto" th:action="@{/categories/edit/{id}(id=*{id})}" th:method="post" th:object="${model}">
+    <div class="img-background-add-living-tip">
+        <div class="container w-75">
+            <h1 class="text-center text-light">Edit Living Tip</h1>
+            <form class="form w-auto mx-auto text-light" th:action="@{/living-tips/edit/{id}(id=*{id})}" th:method="POST"
+                  th:object="${livingTip}">
 
                 <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'text-danger'">
-                    <label for="edit-category-name" class="font-weight-bold">Name</label>
-                    <input type="text" class="form-control" id="edit-category-name" name="name" th:field="*{name}">
-                    <small th:each="error : ${#fields.errors('name')}" th:utext="${error}  + '&lt;br /&gt;'"></small>
+                    <label for="add-name" class="font-weight-bold">Name</label>
+                    <input required type="text" class="form-control input-transparent" id="add-name"
+                           name="name" th:field="*{name}">
+                    <small th:each="error : ${#fields.errors('name')}"
+                           th:utext="${error}  + '&lt;br /&gt;'"></small>
                 </div>
 
-                <hr class="hr-2 bg-dark">
-                <div class="button-holder d-flex justify-content-center">
-                    <button type="submit" class="btn btn-info">Edit Category</button>
+                <div class="form-group" th:classappend="${#fields.hasErrors('category')}? 'text-danger'">
+                    <label for="add-category" class="font-weight-bold">Category</label>
+                    <select required type="text" class="form-control input-transparent" id="add-category"
+                            name="category"
+                            th:field="*{category}" th:errorclass="bg-danger">
+                        <option value="">Select Category</option>
+                        <option th:each="c : ${T(com.example.naturesway.domain.enumerations.LivingTipEnum).values()}"
+                                th:text="${c}" th:value="${c}" value="category" itemLabel="category"></option>
+                    </select>
+                    <small th:each="error : ${#fields.errors('category')}"
+                           th:utext="${error}  + '&lt;br /&gt;'"></small>
+                </div>
+
+                <div class="form-group" th:classappend="${#fields.hasErrors('description')}? 'text-danger'">
+                    <label for="add-description" class="font-weight-bold">Description</label>
+                    <textarea required type="text" class="form-control input-transparent" id="add-description"
+                              rows="6"
+                              name="description" th:field="*{description}"></textarea>
+                    <small th:each="error : ${#fields.errors('description')}"
+                           th:utext="${error}  + '&lt;br /&gt;'"></small>
+                </div>
+
+                <div class="form-group" th:classappend="${#fields.hasErrors('usability')}? 'text-danger'">
+                    <label for="add-usability" class="font-weight-bold">Usability</label>
+                    <textarea required type="text" class="form-control input-transparent" id="add-usability"
+                              rows="4"
+                              name="usability" th:field="*{usability}"></textarea>
+                    <small th:each="error : ${#fields.errors('usability')}"
+                           th:utext="${error}  + '&lt;br /&gt;'"></small>
+                </div>
+
+                <div class="text-center">
+                    <a th:href="@{/living-tips/all}" class="green-color">
+                        <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
+                                 font-weight-bold mb-2 green-color">back</button></a>
+                    <button type="submit" class="btn btn-lg btn-dark btn-position btn-login text-uppercase
+                                 font-weight-bold mb-2 green-color">Edit Event
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 </main>
-<div class="fixed-bottom">
+<div>
     <th:block th:include="~{fragments/footer}"></th:block>
 </div>
 </body>
