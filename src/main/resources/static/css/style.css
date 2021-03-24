@@ -71,7 +71,7 @@ The navbar toggle appears at this breakpoint */
 }
 
 .img-background-all-adventures{
-    background: url("https://res.cloudinary.com/anduala/image/upload/c_scale,w_1946/v1615498713/wallpapers/_DSC2679_qwehzz.jpg");
+    background: url("https://res.cloudinary.com/anduala/image/upload/c_scale,w_1968/v1616601599/wallpapers/High-Achievement-Culture_b11ey1.jpg");
     max-width: 100%;
     max-height: 100%;
     position: relative;
@@ -82,7 +82,7 @@ The navbar toggle appears at this breakpoint */
 }
 
 .img-background-all-living-tips{
-    background: url("https://res.cloudinary.com/anduala/image/upload/c_scale,w_1985/v1615498710/wallpapers/_DSC2441_t2mmx1.jpg");
+    background: url("https://res.cloudinary.com/anduala/image/upload/v1616601389/wallpapers/slide-1-image_lpljok.jpg");
     max-width: 100%;
     max-height: 100%;
     position: relative;
@@ -93,7 +93,7 @@ The navbar toggle appears at this breakpoint */
 }
 
 .img-background-all-events{
-    background: url("https://res.cloudinary.com/anduala/image/upload/c_scale,w_1946/v1615498722/wallpapers/DSC_0025_00009_bf1nto.jpg");
+    background: url("https://res.cloudinary.com/anduala/image/upload/c_scale,w_1920/v1616601600/wallpapers/51-516368_desktop-wallpaper-hd-widescreen-free-download-free-fall_vdleyj.jpg");
     max-width: 100%;
     max-height: 100%;
     position: relative;
@@ -129,6 +129,39 @@ The navbar toggle appears at this breakpoint */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+    height: calc(100vh - 72px);
+    min-height: 25rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+.img-background-adventure-guides{
+    background: url("https://res.cloudinary.com/anduala/image/upload/c_scale,w_1920/v1616601599/wallpapers/DP_sport-success-on-sunset-background_1125x2000_2018-01-08_e2knj4.jpg");
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+    height: calc(100vh - 72px);
+    min-height: 25rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+.img-background-living-tips{
+    background: url("https://res.cloudinary.com/anduala/image/upload/c_scale,w_1920/v1616601388/wallpapers/Tree-Hammock_x96bru.jpg");
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+    height: calc(100vh - 72px);
+    min-height: 25rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+.img-background-upcoming-events{
+    background: url("https://res.cloudinary.com/anduala/image/upload/c_scale,w_1920/v1616375624/wallpapers/pnYMejjzV6pDNWwiv8JNJK_l6qrxk.jpg");
     max-width: 100%;
     max-height: 100%;
     position: relative;

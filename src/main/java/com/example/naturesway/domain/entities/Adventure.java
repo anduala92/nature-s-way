@@ -17,7 +17,8 @@ public class Adventure extends BaseEntity{
     private String duration;
     private String description;
     private String imageUrl;
-
+    private String username;
+    private Boolean favorite;
 
     public Adventure() {
     }
@@ -106,5 +107,21 @@ public class Adventure extends BaseEntity{
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Boolean getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(Boolean favorite) {
+        this.favorite = favorite;
     }
 }

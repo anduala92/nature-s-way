@@ -10,11 +10,13 @@
     <th:block th:include="~{fragments/navbar}"></th:block>
 </header>
 <main>
+    <audio id="newMusic" autoplay loop>
+        <script th:src="@{/js/runBackgroundMusic.js}"></script>
+    </audio>
     <div class="d-flex text-center p-5 img-background-edit-profile-holder">
         <h1 class="green-color edit-profile-margin">Edit Profile</h1>
         <form class="profile-edit-form-width mx-auto input-transparent" th:action="@{/users/edit-profile}" th:method="PATCH" th:object="${model}">
             <hr class="hr-2 bg-light">
-
             <div class="form-group">
                 <div class="form-label-group">
                     <input id="inputUsername" type="text" th:field="*{username}" class="form-control" placeholder="Username"

@@ -10,6 +10,9 @@
     <th:block th:include="~{fragments/navbar}"></th:block>
 </header>
 <main>
+    <audio id="newMusic" autoplay loop>
+        <script th:src="@{/js/runBackgroundMusic.js}"></script>
+    </audio>
     <div class="container img-background-all-users">
         <h1 class="text-center green-color">All Users</h1>
         <div class="bg-light all-users-transparent">

@@ -65,6 +65,19 @@ public class EventController extends BaseController{
         return view("event/all-event", modelAndView);
     }
 
+    @GetMapping("/upcoming-events")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PageTitle("Upcoming Events")
+    public ModelAndView upcomingEvents(ModelAndView modelAndView) {
+        List<EventViewModel> events = eventService.findAll()
+                .stream()
+                .map(event -> mapper.map(event, EventViewModel.class))
+                .collect(Collectors.toList());
+        modelAndView.addObject("events", events);
+
+        return view("event/upcoming-events", modelAndView);
+    }
+
     @GetMapping("/edit/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     @PageTitle("Edit Event")

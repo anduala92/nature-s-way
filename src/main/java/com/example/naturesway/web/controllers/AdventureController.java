@@ -60,7 +60,6 @@ public class AdventureController extends BaseController{
         return redirect("/adventures/all");
     }
 
-
     @GetMapping("/all")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     @PageTitle("All Adventures")
@@ -72,6 +71,19 @@ public class AdventureController extends BaseController{
         modelAndView.addObject("adventures", adventures);
 
         return view("adventure/all-adventure", modelAndView);
+    }
+
+    @GetMapping("/adventure-guides")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PageTitle("Adventure Guides")
+    public ModelAndView adventureGuides(ModelAndView modelAndView) {
+        List<AdventureViewModel> adventures = adventureService.findAll()
+                .stream()
+                .map(adventure -> mapper.map(adventure, AdventureViewModel.class))
+                .collect(Collectors.toList());
+        modelAndView.addObject("adventures", adventures);
+
+        return view("adventure/adventure-guides", modelAndView);
     }
 
     @GetMapping("/edit/{id}")

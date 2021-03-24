@@ -67,6 +67,19 @@ public class LivingTipController extends BaseController{
         return view("livingTip/all-living-tip", modelAndView);
     }
 
+    @GetMapping("/living-tips")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PageTitle("Living Tips")
+    public ModelAndView livingTips(ModelAndView modelAndView) {
+        List<LivingTipViewModel> livingTips = livingTipService.findAll()
+                .stream()
+                .map(livingTip -> mapper.map(livingTip, LivingTipViewModel.class))
+                .collect(Collectors.toList());
+        modelAndView.addObject("livingTips", livingTips);
+
+        return view("livingTip/living-tips", modelAndView);
+    }
+
     @GetMapping("/edit/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     @PageTitle("Edit Living Tip")

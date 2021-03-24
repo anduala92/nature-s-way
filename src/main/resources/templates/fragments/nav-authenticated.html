@@ -9,17 +9,13 @@
         <!--                First line-->
         <ul class="navbar-nav w-100 px-3 justify-content-start">
             <li class="nav-item active font-weight-bold">
-                <a class="nav-link" th:href="@{/bicycles/promotions}">Adventure Guides</a>
+                <a class="nav-link" th:href="@{/adventures/adventure-guides}">Adventure Guides</a>
             </li>
-
-            <li class="nav-item">
-                <div class="dropdown">
-                    <a class="nav-link active font-weight-bold dropdown-toggle" href="#" role="button" id="categoryDropdown"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Living Tips</a>
-                    <div class="dropdown-menu" aria-labelledby="categoryDropdown" id="categoryNav">
-
-                    </div>
-                </div>
+            <li class="nav-item active font-weight-bold">
+                <a class="nav-link" th:href="@{/living-tips/living-tips}">Living Tips</a>
+            </li>
+            <li class="nav-item active font-weight-bold">
+                <a class="nav-link" th:href="@{/events/upcoming-events}">Upcoming Events</a>
             </li>
             <li class="nav-item active font-weight-bold">
                 <a class="nav-link" th:href="@{/error}">Surprise</a>
@@ -42,9 +38,19 @@
                     <img class="mb-1" th:src="@{/images/register-account-logo.png}" th:width="18" th:height="18"
                          alt="register logo"/> Profile</a>
             </li>
-
-            <li class="nav-item active">
-                <a class="nav-link" th:href="@{/orders/customer}">Favorites</a>
+            
+            <li class="nav-item">
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" id="moderatorDropdown"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Favorites
+                    </a>
+                    <div class="dropdown-menu dropdown-transparent bg-dark" aria-labelledby="moderatorDropdown">
+                        <a class="dropdown-item green-color" th:href="@{/favorites/adventure}">Adventures</a>
+                        <a class="dropdown-item green-color" th:href="@{/favorites/living-tips}">Living Tips</a>
+                        <a class="dropdown-item green-color" th:href="@{/favorites/event}">Event</a>
+                    </div>
+                </div>
             </li>
 
             <th:block sec:authorize="hasRole('ROLE_MODERATOR')">

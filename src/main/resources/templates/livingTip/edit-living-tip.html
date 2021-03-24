@@ -10,12 +10,14 @@
     <th:block th:include="~{fragments/navbar}"></th:block>
 </header>
 <main>
+    <audio id="newMusic" autoplay loop>
+        <script th:src="@{/js/runBackgroundMusic.js}"></script>
+    </audio>
     <div class="img-background-add-living-tip">
         <div class="container w-75">
             <h1 class="text-center text-light">Edit Living Tip</h1>
             <form class="form w-auto mx-auto text-light" th:action="@{/living-tips/edit/{id}(id=*{id})}" th:method="PATCH"
                   th:object="${livingTip}">
-
                 <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'text-danger'">
                     <label for="add-name" class="font-weight-bold">Name</label>
                     <input required type="text" class="form-control input-transparent" id="add-name"

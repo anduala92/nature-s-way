@@ -13,6 +13,8 @@ public class LivingTip extends BaseEntity{
     private LivingTipEnum category;
     private String description;
     private String usability;
+    private String username;
+    private Boolean favorite;
 
     public LivingTip() {
     }
@@ -59,5 +61,21 @@ public class LivingTip extends BaseEntity{
 
     public void setUsability(String usability) {
         this.usability = usability;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Boolean getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(Boolean favorite) {
+        this.favorite = favorite;
     }
 }

@@ -15,8 +15,8 @@
     <audio id="newMusic" autoplay loop>
         <script th:src="@{/js/runBackgroundMusic.js}"></script>
     </audio>
-    <div class="container img-background-all-adventures">
-        <h1 class="text-center green-color">All Adventures</h1>
+    <div class="container img-background-adventure-guides">
+        <h1 class="text-center green-color">Adventure Guides</h1>
         <div class="bg-light all-users-transparent">
             <hr class="hr-2 bg-light">
             <div class="margin-table-all-users">
@@ -58,38 +58,14 @@
                             <td>
                                 <a th:href="@{/adventures/edit/{id}(id=${adventure.id})}">
                                     <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
-                                 font-weight-bold mb-2 green-color">Edit
+                                 font-weight-bold mb-2 green-color">Details
                                     </button>
                                 </a>
-                                <a href="#" data-toggle="modal" th:data-target="'#adventureModal' + ${iter.index + 1}"
-                                   class="btn btn-lg btn-dark btn-position btn-login text-uppercase
-                                 font-weight-bold mb-2 green-color">Delete</a>
-                                <!-- Modal -->
-                                <div class="modal fade" th:id="'adventureModal' + ${iter.index + 1}" tabindex="-1"
-                                     role="dialog"
-                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Delete Adventure</h5>
-                                            </div>
-                                            <div class="modal-body"
-                                                 th:text="'Are you sure you want to delete ' + ${adventure.name}">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-lg btn-dark btn-position btn-login text-uppercase
-                                 font-weight-bold mb-2 green-color" data-dismiss="modal">Close
-                                                </button>
-                                                <form th:action="@{/adventures/delete/{id}(id=${adventure.id})}"
-                                                      th:method="DELETE">
-                                                    <button type="submit" class="btn btn-lg btn-dark btn-position btn-login text-uppercase
-                                 font-weight-bold mb-2 green-color">Delete
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <a th:href="@{/adventures/edit/{id}(id=${adventure.id})}">
+                                    <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
+                                 font-weight-bold mb-2 green-color">Favorite
+                                    </button>
+                                </a>
                             </td>
                         </tr>
                     </th:block>
