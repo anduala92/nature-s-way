@@ -2,6 +2,7 @@ package com.example.naturesway.web.controllers;
 
 import com.example.naturesway.domain.binding.EventBindingModel;
 import com.example.naturesway.domain.binding.LivingTipAddBindingModel;
+import com.example.naturesway.domain.serviceModels.AdventureServiceModel;
 import com.example.naturesway.domain.serviceModels.EventServiceModel;
 import com.example.naturesway.domain.serviceModels.LivingTipServiceModel;
 import com.example.naturesway.domain.viewModels.EventViewModel;
@@ -10,6 +11,8 @@ import com.example.naturesway.service.EventService;
 import com.example.naturesway.web.annotations.PageTitle;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -76,6 +79,25 @@ public class EventController extends BaseController{
         modelAndView.addObject("events", events);
 
         return view("event/upcoming-events", modelAndView);
+    }
+
+    @GetMapping ("/upcoming-events/{id}")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ModelAndView addToFavorites(@PathVariable String id){
+        EventServiceModel eventServiceModel = eventService.findById(id);
+
+        eventServiceModel.setFavorite(true);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        eventServiceModel.setUsername(username);
+
+        eventService.updateEvent(eventServiceModel);
+        return redirect("/events/upcoming-events");
     }
 
     @GetMapping("/edit/{id}")

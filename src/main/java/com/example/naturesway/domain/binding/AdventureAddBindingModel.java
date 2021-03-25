@@ -21,7 +21,6 @@ public class AdventureAddBindingModel {
     private String description;
     private MultipartFile image;
 
-
     public AdventureAddBindingModel() {
     }
 

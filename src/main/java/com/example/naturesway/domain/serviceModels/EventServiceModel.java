@@ -8,6 +8,8 @@ public class EventServiceModel {
     private Date eventDate;
     private String location;
     private String programme;
+    private String username;
+    private Boolean favorite;
 
     public EventServiceModel() {
     }
@@ -50,5 +52,21 @@ public class EventServiceModel {
 
     public void setProgramme(String programme) {
         this.programme = programme;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Boolean getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(Boolean favorite) {
+        this.favorite = favorite;
     }
 }

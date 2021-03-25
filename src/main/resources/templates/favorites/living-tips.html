@@ -13,33 +13,32 @@
     <audio id="newMusic" autoplay loop>
         <script th:src="@{/js/runBackgroundMusic.js}"></script>
     </audio>
-    <div class="container img-background-upcoming-events">
-        <h1 class="text-center green-color">All Events</h1>
+    <div class="container img-background-living-tips">
+        <h1 class="text-center green-color">Living Tips</h1>
         <div class="bg-light all-users-transparent">
             <hr class="hr-2 bg-light">
             <div class="margin-table-all-users">
-                <table class="table table-hover mx-auto text-center" id="events_table_id">
+                <table class="table table-hover mx-auto text-center" id="living_tips_table_id">
                     <thead>
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Event Date</th>
-                        <th>Location</th>
-                        <th>Programme</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Usability</th>
                         <th class="green-color">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <th:block th:each="event, iter : ${events}">
+                    <th:block th:each="livingTip, iter : ${livingTips}">
                         <tr>
                             <td th:text="${iter.index + 1}"></td>
-                            <td th:text="${event.name}"></td>
-                            <td th:text="${event.eventDate}"></td>
-                            <td th:text="${event.location}"></td>
-                            <td th:text="${event.programme}"></td>
-
+                            <td th:text="${livingTip.name}"></td>
+                            <td th:text="${livingTip.category}"></td>
+                            <td th:text="${livingTip.description}"></td>
+                            <td th:text="${livingTip.usability}"></td>
                             <td>
-                                <a th:href="@{/events/edit/{id}(id=${event.id})}">
+                                <a th:href="@{/living-tips/edit/{id}(id=${livingTip.id})}">
                                     <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
                                  font-weight-bold mb-2 green-color">Remove
                                     </button>
@@ -60,7 +59,7 @@
 </body>
 <script>
     $(document).ready(function () {
-        $('#events_table_id').DataTable();
+        $('#living_tips_table_id').DataTable();
     });
 </script>
 </html>

@@ -12,6 +12,8 @@ import com.example.naturesway.utils.CloudinaryService;
 import com.example.naturesway.web.annotations.PageTitle;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -78,6 +80,25 @@ public class LivingTipController extends BaseController{
         modelAndView.addObject("livingTips", livingTips);
 
         return view("livingTip/living-tips", modelAndView);
+    }
+
+    @GetMapping ("/living-tips/{id}")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ModelAndView addToFavorites(@PathVariable String id){
+        LivingTipServiceModel livingTipServiceModel = livingTipService.findById(id);
+
+        livingTipServiceModel.setFavorite(true);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        livingTipServiceModel.setUsername(username);
+
+        livingTipService.updateEvent(livingTipServiceModel);
+        return redirect("/living-tips/living-tips");
     }
 
     @GetMapping("/edit/{id}")

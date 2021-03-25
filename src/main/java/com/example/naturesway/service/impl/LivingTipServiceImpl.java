@@ -62,6 +62,11 @@ public class LivingTipServiceImpl implements LivingTipService {
         livingTipRepository.save(livingTip);
     }
 
+    @Override
+    public void updateEvent(LivingTipServiceModel livingTipServiceModel) {
+        livingTipRepository.save(mapper.map(livingTipServiceModel, LivingTip.class));
+    }
+
     private LivingTipServiceModel getLivingTipServiceModel(LivingTip livingTip) {
         LivingTipServiceModel serviceModel = mapper.map(livingTip, LivingTipServiceModel.class);
 

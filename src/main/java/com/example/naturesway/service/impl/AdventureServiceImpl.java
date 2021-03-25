@@ -66,6 +66,20 @@ public class AdventureServiceImpl implements AdventureService {
         adventureRepository.save(adventure);
     }
 
+    @Override
+    public void updateAdventure(AdventureServiceModel adventureServiceModel) {
+        adventureRepository.save(mapper.map(adventureServiceModel,Adventure.class));
+    }
+
+    @Override
+    public Collection<AdventureServiceModel> findFavorites(String username) {
+        Boolean favorite = true;
+        return adventureRepository.findAllByUsernameAndFavorite(username,favorite)
+                .stream()
+                .map(this::getAdventureServiceModel)
+                .collect(Collectors.toList());
+    }
+
     private AdventureServiceModel getAdventureServiceModel(Adventure adventure) {
         AdventureServiceModel serviceModel = mapper.map(adventure, AdventureServiceModel.class);
 

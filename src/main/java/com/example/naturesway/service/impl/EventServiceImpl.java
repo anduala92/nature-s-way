@@ -1,5 +1,6 @@
 package com.example.naturesway.service.impl;
 
+import com.example.naturesway.domain.entities.Adventure;
 import com.example.naturesway.domain.entities.Event;
 import com.example.naturesway.domain.serviceModels.EventServiceModel;
 import com.example.naturesway.error.RecordNotFoundException;
@@ -57,6 +58,11 @@ public class EventServiceImpl implements EventService {
         event.setProgramme(eventServiceModel.getProgramme());
 
         eventRepository.save(event);
+    }
+
+    @Override
+    public void updateEvent(EventServiceModel eventServiceModel) {
+        eventRepository.save(mapper.map(eventServiceModel, Event.class));
     }
 
     private EventServiceModel getEventServiceModel(Event event) {

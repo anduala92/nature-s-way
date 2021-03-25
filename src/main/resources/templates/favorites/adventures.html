@@ -58,19 +58,9 @@
                             <td>
                                 <a th:href="@{/adventures/edit/{id}(id=${adventure.id})}">
                                     <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
-                                 font-weight-bold mb-2 green-color">Details
+                                 font-weight-bold mb-2 green-color">Remove
                                     </button>
                                 </a>
-                                <span th:unless="${adventure.favorite}">
-                                    <a th:href="@{/adventures/adventure-guides/{id}(id=${adventure.id})}">
-                                        <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
-                                        font-weight-bold mb-2 green-color">Favorite</button>
-                                    </a>
-                                </span>
-                                <span th:if="${adventure.favorite}">
-                                        <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
-                                        font-weight-bold mb-2 green-color" disabled>Favorite</button>
-                                </span>
                             </td>
                         </tr>
                     </th:block>

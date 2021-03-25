@@ -14,4 +14,8 @@ public interface AdventureService {
     AdventureServiceModel findById(String id);
 
     void editById(String id, AdventureServiceModel adventureServiceModel);
+
+    void updateAdventure(AdventureServiceModel adventureServiceModel);
+
+    Collection<AdventureServiceModel> findFavorites(String username);
 }

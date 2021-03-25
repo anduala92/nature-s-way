@@ -41,9 +41,19 @@
                             <td>
                                 <a th:href="@{/events/edit/{id}(id=${event.id})}">
                                     <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
-                                 font-weight-bold mb-2 green-color">Remove
+                                 font-weight-bold mb-2 green-color">Details
                                     </button>
                                 </a>
+                                <span th:unless="${event.favorite}">
+                                    <a th:href="@{/events/upcoming-events/{id}(id=${event.id})}">
+                                    <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
+                                        font-weight-bold mb-2 green-color">Favorite</button>
+                                    </a>
+                                </span>
+                                <span th:if="${event.favorite}">
+                                        <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
+                                            font-weight-bold mb-2 green-color" disabled>Favorite</button>
+                                </span>
                             </td>
                         </tr>
                     </th:block>

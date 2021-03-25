@@ -26,7 +26,7 @@
         <ul class="navbar-nav w-100 px-3 justify-content-end">
 
             <li class="nav-item active">
-                    <a id="mute-video" class="nav-link" href="#">
+                    <a id="mute-sound" class="nav-link" href="#">
                         <img th:src="@{/images/music-logo.png}" th:width="17" th:height="19" alt="login logo"/>
                         <span class="green-color font-weight-bolder">Music</span>
                         <script th:src="@{/js/mute-unmute.js}"></script>
@@ -38,7 +38,7 @@
                     <img class="mb-1" th:src="@{/images/register-account-logo.png}" th:width="18" th:height="18"
                          alt="register logo"/> Profile</a>
             </li>
-            
+
             <li class="nav-item">
                 <div class="dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" id="moderatorDropdown"
@@ -46,7 +46,7 @@
                         Favorites
                     </a>
                     <div class="dropdown-menu dropdown-transparent bg-dark" aria-labelledby="moderatorDropdown">
-                        <a class="dropdown-item green-color" th:href="@{/favorites/adventure}">Adventures</a>
+                        <a class="dropdown-item green-color" th:href="@{/adventures/favorites}">Adventures</a>
                         <a class="dropdown-item green-color" th:href="@{/favorites/living-tips}">Living Tips</a>
                         <a class="dropdown-item green-color" th:href="@{/favorites/event}">Event</a>
                     </div>

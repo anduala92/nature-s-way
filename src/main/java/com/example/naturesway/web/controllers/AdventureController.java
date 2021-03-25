@@ -1,9 +1,7 @@
 package com.example.naturesway.web.controllers;
 
 import com.example.naturesway.domain.binding.AdventureAddBindingModel;
-import com.example.naturesway.domain.binding.LivingTipAddBindingModel;
 import com.example.naturesway.domain.serviceModels.AdventureServiceModel;
-import com.example.naturesway.domain.serviceModels.LivingTipServiceModel;
 import com.example.naturesway.domain.viewModels.AdventureViewModel;
 import com.example.naturesway.service.AdventureService;
 import com.example.naturesway.utils.CloudinaryService;
@@ -11,6 +9,8 @@ import com.example.naturesway.web.annotations.PageTitle;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -84,6 +84,45 @@ public class AdventureController extends BaseController{
         modelAndView.addObject("adventures", adventures);
 
         return view("adventure/adventure-guides", modelAndView);
+    }
+
+    @GetMapping ("/adventure-guides/{id}")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ModelAndView addToFavorites(@PathVariable String id){
+        AdventureServiceModel adventureServiceModel = adventureService.findById(id);
+
+        adventureServiceModel.setFavorite(true);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        adventureServiceModel.setUsername(username);
+
+        adventureService.updateAdventure(adventureServiceModel);
+        return redirect("/adventures/adventure-guides");
+    }
+
+    @GetMapping("/favorites")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PageTitle("Adventure Guides")
+    public ModelAndView favoritesAdventures(ModelAndView modelAndView) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        List<AdventureViewModel> adventures = adventureService.findFavorites(username)
+                .stream()
+                .map(adventure -> mapper.map(adventure, AdventureViewModel.class))
+                .collect(Collectors.toList());
+        modelAndView.addObject("adventures", adventures);
+
+        return view("favorites/adventures", modelAndView);
     }
 
     @GetMapping("/edit/{id}")
