@@ -43,7 +43,7 @@
                             <td>
                                 <a class="image-link" th:href="${adventure.imageUrl}">
                                     <img th:src="${adventure.imageUrl}" width="40" height="40"
-                                         alt="Bicycle">
+                                         alt="Picture">
                                 </a>
                             </td>
                             <td th:text="${adventure.name}"></td>
@@ -56,11 +56,50 @@
                             <td th:text="${adventure.description}"></td>
 
                             <td>
-                                <a th:href="@{/adventures/edit/{id}(id=${adventure.id})}">
-                                    <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
-                                 font-weight-bold mb-2 green-color">Details
-                                    </button>
-                                </a>
+                                <a href="#" data-toggle="modal" th:data-target="'#adventureModal' + ${iter.index + 1}"
+                                   class="btn btn-lg btn-dark btn-position btn-login text-uppercase
+                                 font-weight-bold mb-2 green-color">Details</a>
+                                <div class="modal fade" th:id="'adventureModal' + ${iter.index + 1}" tabindex="-1"
+                                     role="dialog"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Details Livint Tip</h5>
+                                            </div>
+                                            <div class="modal-body"
+                                                 th:text="'Adventure Name: ' + ${adventure.name}">
+                                            </div>
+                                            <div class="modal-body"
+                                                 th:text="'Adventure Category: ' + ${adventure.category}">
+                                            </div>
+                                            <div class="modal-body"
+                                                 th:text="'Adventure Country: ' + ${adventure.country}">
+                                            </div>
+                                            <div class="modal-body"
+                                                 th:text="'Adventure Level: ' + ${adventure.level}">
+                                            </div>
+                                            <div class="modal-body"
+                                                 th:text="'Adventure Tips: ' + ${adventure.tips}">
+                                            </div>
+                                            <div class="modal-body"
+                                                 th:text="'Adventure Required Equipent: ' + ${adventure.requiredEquipment}">
+                                            </div>
+                                            <div class="modal-body"
+                                                 th:text="'Adventure Duration: ' + ${adventure.duration}">
+                                            </div>
+                                            <div class="modal-body"
+                                                 th:text="'Adventure Description: ' + ${adventure.description}">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-lg btn-dark btn-position btn-login text-uppercase
+                                 font-weight-bold mb-2 green-color" data-dismiss="modal">Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <span th:unless="${adventure.favorite}">
                                     <a th:href="@{/adventures/adventure-guides/{id}(id=${adventure.id})}">
                                         <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase

@@ -38,11 +38,38 @@
                             <td th:text="${livingTip.description}"></td>
                             <td th:text="${livingTip.usability}"></td>
                             <td>
-                                <a th:href="@{/living-tips/edit/{id}(id=${livingTip.id})}">
-                                    <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
-                                 font-weight-bold mb-2 green-color">Details
-                                    </button>
-                                </a>
+                                <a href="#" data-toggle="modal" th:data-target="'#adventureModal' + ${iter.index + 1}"
+                                   class="btn btn-lg btn-dark btn-position btn-login text-uppercase
+                                 font-weight-bold mb-2 green-color">Details</a>
+                                <div class="modal fade" th:id="'adventureModal' + ${iter.index + 1}" tabindex="-1"
+                                     role="dialog"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Details Livint Tip</h5>
+                                            </div>
+                                            <div class="modal-body"
+                                                 th:text="'Living Tip Name: ' + ${livingTip.name}">
+                                            </div>
+                                            <div class="modal-body"
+                                                 th:text="'Living Tip Category: ' + ${livingTip.category}">
+                                            </div>
+                                            <div class="modal-body"
+                                                 th:text="'Living Tip Description: ' + ${livingTip.description}">
+                                            </div>
+                                            <div class="modal-body"
+                                                 th:text="'Living Tip Usability6: ' + ${livingTip.usability}">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-lg btn-dark btn-position btn-login text-uppercase
+                                 font-weight-bold mb-2 green-color" data-dismiss="modal">Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <span th:unless="${livingTip.favorite}">
                                     <a th:href="@{/living-tips/living-tips/{id}(id=${livingTip.id})}">
                                         <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase

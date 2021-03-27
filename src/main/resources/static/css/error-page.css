@@ -9,7 +9,7 @@
 
 .page_404  img{ width:100%;}
 
-.four_zero_four_bg{
+.error-bg{
     background-image: url(https://res.cloudinary.com/anduala/image/upload/v1615417814/wallpapers/Error_Loading_GIF_-_Error_Loading_Cat_-_Discover_Share_GIFs_fxllkt.gif);
     width: 480px;
     height: 350px;
@@ -18,11 +18,11 @@
 }
 
 
-.four_zero_four_bg h1{
+.error-bg h1{
     font-size:80px;
 }
 
-.four_zero_four_bg h3{
+.error-bg h3{
     font-size:80px;
 }
 

@@ -90,8 +90,7 @@ public class UserController extends BaseController{
         return view("user/edit-profile", modelAndView);
     }
 
-    @PatchMapping
-            ("/edit-profile")
+    @PatchMapping("/edit-profile")
     @PreAuthorize("isAuthenticated()")
     public ModelAndView editProfileConfirm(@Valid @ModelAttribute(name = "model") UserEditBindingModel model,
                                            BindingResult bindingResult){
@@ -142,7 +141,6 @@ public class UserController extends BaseController{
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PageTitle("All Users")
     public ModelAndView allUsers(ModelAndView modelAndView){
-        //todo make better view fix search and count with margin left top and margin right top
         List<UserAllViewModel> users = userService.findAll()
                 .stream()
                 .map(u -> {
