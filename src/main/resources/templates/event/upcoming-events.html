@@ -14,7 +14,7 @@
         <script th:src="@{/js/runBackgroundMusic.js}"></script>
     </audio>
     <div class="container img-background-upcoming-events">
-        <h1 class="text-center green-color">All Events</h1>
+        <h1 class="text-center green-color">Upcoming Events</h1>
         <div class="bg-light all-users-transparent">
             <hr class="hr-2 bg-light">
             <div class="margin-table-all-users">
@@ -41,9 +41,19 @@
                             <td>
                                 <a th:href="@{/events/edit/{id}(id=${event.id})}">
                                     <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
-                                 font-weight-bold mb-2 green-color">Remove
+                                 font-weight-bold mb-2 green-color">Details
                                     </button>
                                 </a>
+                                <span th:unless="${event.favorite}">
+                                    <a th:href="@{/events/upcoming-events/{id}(id=${event.id})}">
+                                        <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
+                                        font-weight-bold mb-2 green-color">Favorite</button>
+                                    </a>
+                                </span>
+                                <span th:if="${event.favorite}">
+                                        <button class="btn bnn-lg btn-dark btn-position btn-login text-uppercase
+                                        font-weight-bold mb-2 green-color" disabled>Favorite</button>
+                                </span>
                             </td>
                         </tr>
                     </th:block>

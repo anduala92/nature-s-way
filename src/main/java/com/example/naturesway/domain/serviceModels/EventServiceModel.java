@@ -1,25 +1,16 @@
 package com.example.naturesway.domain.serviceModels;
 
 import java.util.Date;
+import java.util.Set;
 
-public class EventServiceModel {
-    private String id;
+public class EventServiceModel extends BaseServiceModel{
     private String name;
     private Date eventDate;
     private String location;
     private String programme;
-    private String username;
-    private Boolean favorite;
+    private Set<UserServiceModel> users;
 
     public EventServiceModel() {
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -54,19 +45,11 @@ public class EventServiceModel {
         this.programme = programme;
     }
 
-    public String getUsername() {
-        return username;
+    public Set<UserServiceModel> getUsers() {
+        return users;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Boolean getFavorite() {
-        return favorite;
-    }
-
-    public void setFavorite(Boolean favorite) {
-        this.favorite = favorite;
+    public void setUsers(Set<UserServiceModel> users) {
+        this.users = users;
     }
 }

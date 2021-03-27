@@ -1,14 +1,13 @@
 package com.example.naturesway.web.controllers;
 
-import com.example.naturesway.domain.binding.EventBindingModel;
 import com.example.naturesway.domain.binding.LivingTipAddBindingModel;
 import com.example.naturesway.domain.serviceModels.AdventureServiceModel;
-import com.example.naturesway.domain.serviceModels.EventServiceModel;
 import com.example.naturesway.domain.serviceModels.LivingTipServiceModel;
+import com.example.naturesway.domain.serviceModels.UserServiceModel;
 import com.example.naturesway.domain.viewModels.AdventureViewModel;
 import com.example.naturesway.domain.viewModels.LivingTipViewModel;
 import com.example.naturesway.service.LivingTipService;
-import com.example.naturesway.utils.CloudinaryService;
+import com.example.naturesway.service.UserService;
 import com.example.naturesway.web.annotations.PageTitle;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,16 +20,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/living-tips")
 public class LivingTipController extends BaseController{
+    private final UserService userService;
     private final LivingTipService livingTipService;
     private final ModelMapper mapper;
 
-    public LivingTipController(LivingTipService livingTipService, ModelMapper mapper) {
+    public LivingTipController(UserService userService, LivingTipService livingTipService, ModelMapper mapper) {
+        this.userService = userService;
         this.livingTipService = livingTipService;
         this.mapper = mapper;
     }
@@ -77,6 +81,15 @@ public class LivingTipController extends BaseController{
                 .stream()
                 .map(livingTip -> mapper.map(livingTip, LivingTipViewModel.class))
                 .collect(Collectors.toList());
+
+        String username = getCurrentUser();
+        for (LivingTipViewModel livingTip : livingTips) {
+            for (UserServiceModel user : livingTip.getUsers()) {
+                if (user.getUsername().equals(username)){
+                    livingTip.setFavorite(true);
+                }
+            }
+        }
         modelAndView.addObject("livingTips", livingTips);
 
         return view("livingTip/living-tips", modelAndView);
@@ -86,19 +99,54 @@ public class LivingTipController extends BaseController{
     @PreAuthorize("hasRole('ROLE_USER')")
     public ModelAndView addToFavorites(@PathVariable String id){
         LivingTipServiceModel livingTipServiceModel = livingTipService.findById(id);
-
-        livingTipServiceModel.setFavorite(true);
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username;
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-        livingTipServiceModel.setUsername(username);
-
-        livingTipService.updateEvent(livingTipServiceModel);
+        String username = getCurrentUser();
+        UserServiceModel userServiceModel = userService.findUserByUsername(username);
+        livingTipServiceModel.getUsers().add(userServiceModel);
+        livingTipService.updateLivingTip(livingTipServiceModel);
         return redirect("/living-tips/living-tips");
+    }
+
+    @GetMapping("/favorites")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PageTitle("Favorite Events")
+    public ModelAndView favoritesAdventures(ModelAndView modelAndView) {
+        String username = getCurrentUser();
+
+        List<LivingTipViewModel> livingTips = livingTipService.findAll()
+                .stream()
+                .map(livingTip -> mapper.map(livingTip, LivingTipViewModel.class))
+                .collect(Collectors.toList());
+
+        List<LivingTipViewModel> favoriteLivingTips = new ArrayList<>();
+
+        for (LivingTipViewModel livingTipViewModel : livingTips) {
+            for (UserServiceModel livingTipUser : livingTipViewModel.getUsers()) {
+                if (livingTipUser.getUsername().equals(username)){
+                    favoriteLivingTips.add(livingTipViewModel);
+                }
+            }
+        }
+        modelAndView.addObject("livingTips", favoriteLivingTips);
+
+        return view("favorites/living-tips", modelAndView);
+    }
+
+    @GetMapping ("/favorites/remove/{id}")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ModelAndView removeFromFavorites(@PathVariable String id){
+        LivingTipServiceModel livingTipServiceModel = livingTipService.findById(id);
+
+        String username = getCurrentUser();
+
+        Set<UserServiceModel> filteredUsers = new HashSet<>();
+        for (UserServiceModel user : livingTipServiceModel.getUsers()) {
+            if (!user.getUsername().equals(username)){
+                filteredUsers.add(user);
+            }
+        }
+        livingTipServiceModel.setUsers(filteredUsers);
+        livingTipService.updateLivingTip(livingTipServiceModel);
+        return redirect("/living-tips/favorites");
     }
 
     @GetMapping("/edit/{id}")
@@ -131,5 +179,16 @@ public class LivingTipController extends BaseController{
     public ModelAndView delete(@PathVariable String id){
         livingTipService.deleteLivingTipById(id);
         return redirect("/living-tips/all");
+    }
+
+    private String getCurrentUser() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        return username;
     }
 }

@@ -15,12 +15,12 @@
     <audio id="newMusic" autoplay loop>
         <script th:src="@{/js/runBackgroundMusic.js}"></script>
     </audio>
-    <div class="container img-background-adventure-guides">
-        <h1 class="text-center green-color">Adventure Guides</h1>
+    <div class="container img-background-favorite-adventures">
+        <h1 class="text-center green-color">Favorite Adventures</h1>
         <div class="bg-light all-users-transparent">
             <hr class="hr-2 bg-light">
             <div class="margin-table-all-users">
-                <table class="table table-hover mx-auto text-center" id="adventures_">
+                <table class="table table-hover mx-auto text-center" id="adventures_table_id">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -56,7 +56,7 @@
                             <td th:text="${adventure.description}"></td>
 
                             <td>
-                                <a th:href="@{/adventures/edit/{id}(id=${adventure.id})}">
+                                <a th:href="@{/adventures/favorites/remove/{id}(id=${adventure.id})}">
                                     <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
                                  font-weight-bold mb-2 green-color">Remove
                                     </button>

@@ -149,8 +149,41 @@ The navbar toggle appears at this breakpoint */
     overflow: hidden;
 }
 
+.img-background-favorite-adventures{
+    background: url("https://res.cloudinary.com/anduala/image/upload/v1616869818/wallpapers/9158dc2d047e1468da5860ea03e913d5_d52xcj.jpg");
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+    height: calc(100vh - 72px);
+    min-height: 25rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+.img-background-favorite-living-tips{
+    background: url("https://res.cloudinary.com/anduala/image/upload/c_scale,w_1920/v1616869824/wallpapers/336628-svetik_txwgqa.jpg");
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+    height: calc(100vh - 72px);
+    min-height: 25rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+.img-background-favorite-events{
+    background: url("https://res.cloudinary.com/anduala/image/upload/v1616869819/wallpapers/6hwGUu_lxcqyj.jpg");
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+    height: calc(100vh - 72px);
+    min-height: 25rem;
+    width: 100%;
+    overflow: hidden;
+}
+
 .img-background-living-tips{
-    background: url("https://res.cloudinary.com/anduala/image/upload/c_scale,w_1920/v1616601388/wallpapers/Tree-Hammock_x96bru.jpg");
+    background: url("https://res.cloudinary.com/anduala/image/upload/c_scale,w_1920/v1616601389/wallpapers/camping-bend-oregon-1600x900_vwsiqb.jpg");
     max-width: 100%;
     max-height: 100%;
     position: relative;

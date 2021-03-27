@@ -1,6 +1,9 @@
 package com.example.naturesway.domain.viewModels;
 
 import com.example.naturesway.domain.enumerations.AdventureCategoryEnum;
+import com.example.naturesway.domain.serviceModels.UserServiceModel;
+
+import java.util.Set;
 
 public class AdventureViewModel {
     private String id;
@@ -13,8 +16,8 @@ public class AdventureViewModel {
     private String duration;
     private String description;
     private String imageUrl;
-    private String username;
     private Boolean favorite;
+    private Set<UserServiceModel> users;
 
     public AdventureViewModel() {
     }
@@ -99,19 +102,19 @@ public class AdventureViewModel {
         this.imageUrl = imageUrl;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public Boolean getFavorite() {
         return favorite;
     }
 
     public void setFavorite(Boolean favorite) {
         this.favorite = favorite;
+    }
+
+    public Set<UserServiceModel> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<UserServiceModel> users) {
+        this.users = users;
     }
 }

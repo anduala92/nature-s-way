@@ -13,8 +13,8 @@
     <audio id="newMusic" autoplay loop>
         <script th:src="@{/js/runBackgroundMusic.js}"></script>
     </audio>
-    <div class="container img-background-living-tips">
-        <h1 class="text-center green-color">Living Tips</h1>
+    <div class="container img-background-favorite-living-tips">
+        <h1 class="text-center green-color">Favorite Living Tips</h1>
         <div class="bg-light all-users-transparent">
             <hr class="hr-2 bg-light">
             <div class="margin-table-all-users">
@@ -38,7 +38,7 @@
                             <td th:text="${livingTip.description}"></td>
                             <td th:text="${livingTip.usability}"></td>
                             <td>
-                                <a th:href="@{/living-tips/edit/{id}(id=${livingTip.id})}">
+                                <a th:href="@{/living-tips/favorites/remove/{id}(id=${livingTip.id})}">
                                     <button class="btn btn-lg btn-dark btn-position btn-login text-uppercase
                                  font-weight-bold mb-2 green-color">Remove
                                     </button>

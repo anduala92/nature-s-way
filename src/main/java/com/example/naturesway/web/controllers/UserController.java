@@ -159,7 +159,7 @@ public class UserController extends BaseController{
 
     @GetMapping("/all-delete")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PageTitle("All Users")
+    @PageTitle("Delete All Users")
     public ModelAndView allDeleteUsers(ModelAndView modelAndView){
         List<UserAllViewModel> users = userService.findAll()
                 .stream()

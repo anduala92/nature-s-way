@@ -1,5 +1,6 @@
 package com.example.naturesway.service;
 
+import com.example.naturesway.domain.entities.Adventure;
 import com.example.naturesway.domain.serviceModels.AdventureServiceModel;
 
 import java.util.Collection;
@@ -15,7 +16,6 @@ public interface AdventureService {
 
     void editById(String id, AdventureServiceModel adventureServiceModel);
 
-    void updateAdventure(AdventureServiceModel adventureServiceModel);
+    void saveAdventure(AdventureServiceModel adventureServiceModel);
 
-    Collection<AdventureServiceModel> findFavorites(String username);
 }

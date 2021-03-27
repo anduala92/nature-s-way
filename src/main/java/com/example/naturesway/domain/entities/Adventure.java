@@ -4,6 +4,7 @@ import com.example.naturesway.domain.enumerations.AdventureCategoryEnum;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Table(name = "adventures")
@@ -17,8 +18,7 @@ public class Adventure extends BaseEntity{
     private String duration;
     private String description;
     private String imageUrl;
-    private String username;
-    private Boolean favorite;
+    private Set<User> users;
 
     public Adventure() {
     }
@@ -109,19 +109,22 @@ public class Adventure extends BaseEntity{
         this.imageUrl = imageUrl;
     }
 
-    public String getUsername() {
-        return username;
+    @ManyToMany(targetEntity = User.class, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "adentures_users",
+            joinColumns = @JoinColumn(
+                    name = "adventure_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "users_id",
+                    referencedColumnName = "id"
+            )
+    )    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Boolean getFavorite() {
-        return favorite;
-    }
-
-    public void setFavorite(Boolean favorite) {
-        this.favorite = favorite;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

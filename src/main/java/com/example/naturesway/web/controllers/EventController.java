@@ -1,13 +1,13 @@
 package com.example.naturesway.web.controllers;
 
 import com.example.naturesway.domain.binding.EventBindingModel;
-import com.example.naturesway.domain.binding.LivingTipAddBindingModel;
 import com.example.naturesway.domain.serviceModels.AdventureServiceModel;
 import com.example.naturesway.domain.serviceModels.EventServiceModel;
-import com.example.naturesway.domain.serviceModels.LivingTipServiceModel;
+import com.example.naturesway.domain.serviceModels.UserServiceModel;
+import com.example.naturesway.domain.viewModels.AdventureViewModel;
 import com.example.naturesway.domain.viewModels.EventViewModel;
-import com.example.naturesway.domain.viewModels.LivingTipViewModel;
 import com.example.naturesway.service.EventService;
+import com.example.naturesway.service.UserService;
 import com.example.naturesway.web.annotations.PageTitle;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,16 +20,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/events")
 public class EventController extends BaseController{
+    private final UserService userService;
     private final EventService eventService;
     private final ModelMapper mapper;
 
-    public EventController(EventService eventService, ModelMapper mapper) {
+    public EventController(UserService userService, EventService eventService, ModelMapper mapper) {
+        this.userService = userService;
         this.eventService = eventService;
         this.mapper = mapper;
     }
@@ -78,6 +83,15 @@ public class EventController extends BaseController{
                 .collect(Collectors.toList());
         modelAndView.addObject("events", events);
 
+        String username = getCurrentUser();
+        for (EventViewModel event : events) {
+            for (UserServiceModel user : event.getUsers()) {
+                if (user.getUsername().equals(username)){
+                    event.setFavorite(true);
+                }
+            }
+        }
+        modelAndView.addObject("adventures", events);
         return view("event/upcoming-events", modelAndView);
     }
 
@@ -85,19 +99,55 @@ public class EventController extends BaseController{
     @PreAuthorize("hasRole('ROLE_USER')")
     public ModelAndView addToFavorites(@PathVariable String id){
         EventServiceModel eventServiceModel = eventService.findById(id);
-
-        eventServiceModel.setFavorite(true);
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username;
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-        eventServiceModel.setUsername(username);
+        String username = getCurrentUser();
+        UserServiceModel userServiceModel = userService.findUserByUsername(username);
+        eventServiceModel.getUsers().add(userServiceModel);
 
         eventService.updateEvent(eventServiceModel);
         return redirect("/events/upcoming-events");
+    }
+
+
+    @GetMapping("/favorites")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PageTitle("Favorite Events")
+    public ModelAndView favoritesAdventures(ModelAndView modelAndView) {
+        String username = getCurrentUser();
+
+        List<EventViewModel> events = eventService.findAll()
+                .stream()
+                .map(event -> mapper.map(event, EventViewModel.class))
+                .collect(Collectors.toList());
+
+        List<EventViewModel> favoriteEvents = new ArrayList<>();
+
+        for (EventViewModel eventViewModel : events) {
+            for (UserServiceModel eventUser : eventViewModel.getUsers()) {
+                if (eventUser.getUsername().equals(username)){
+                    favoriteEvents.add(eventViewModel);
+                }
+            }
+        }
+        modelAndView.addObject("events", favoriteEvents);
+
+        return view("favorites/events", modelAndView);
+    }
+
+    @GetMapping ("/favorites/remove/{id}")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ModelAndView removeFromFavorites(@PathVariable String id){
+        EventServiceModel eventServiceModel = eventService.findById(id);
+        String username = getCurrentUser();
+
+        Set<UserServiceModel> filteredUsers = new HashSet<>();
+        for (UserServiceModel user : eventServiceModel.getUsers()) {
+            if (!user.getUsername().equals(username)){
+                filteredUsers.add(user);
+            }
+        }
+        eventServiceModel.setUsers(filteredUsers);
+        eventService.updateEvent(eventServiceModel);
+        return redirect("/events/favorites");
     }
 
     @GetMapping("/edit/{id}")
@@ -130,5 +180,16 @@ public class EventController extends BaseController{
     public ModelAndView delete(@PathVariable String id){
         eventService.deleteEventById(id);
         return redirect("/events/all");
+    }
+
+    private String getCurrentUser() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        return username;
     }
 }

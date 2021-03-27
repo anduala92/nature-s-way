@@ -1,6 +1,9 @@
 package com.example.naturesway.domain.viewModels;
 
 import com.example.naturesway.domain.enumerations.LivingTipEnum;
+import com.example.naturesway.domain.serviceModels.UserServiceModel;
+
+import java.util.Set;
 
 public class LivingTipViewModel {
     private String id;
@@ -8,8 +11,9 @@ public class LivingTipViewModel {
     private LivingTipEnum category;
     private String description;
     private String usability;
-    private String username;
     private Boolean favorite;
+    private Set<UserServiceModel> users;
+
 
     public LivingTipViewModel() {
     }
@@ -54,19 +58,19 @@ public class LivingTipViewModel {
         this.usability = usability;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public Boolean getFavorite() {
         return favorite;
     }
 
     public void setFavorite(Boolean favorite) {
         this.favorite = favorite;
+    }
+
+    public Set<UserServiceModel> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<UserServiceModel> users) {
+        this.users = users;
     }
 }

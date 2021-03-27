@@ -3,13 +3,24 @@ package com.example.naturesway.domain.serviceModels;
 import java.util.Set;
 
 public class UserServiceModel extends BaseServiceModel {
-
+    private String id;
     private String username;
     private String password;
     private String firstName;
     private String lastName;
     private String email;
     private Set<RoleServiceModel> authorities;
+    private Set<AdventureServiceModel> adventures;
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -57,5 +68,13 @@ public class UserServiceModel extends BaseServiceModel {
 
     public void setAuthorities(Set<RoleServiceModel> authorities) {
         this.authorities = authorities;
+    }
+
+    public Set<AdventureServiceModel> getAdventures() {
+        return adventures;
+    }
+
+    public void setAdventures(Set<AdventureServiceModel> adventures) {
+        this.adventures = adventures;
     }
 }

@@ -25,7 +25,7 @@
             <div class="d-flex align-items-center py-5">
                 <div class="col-md-9 col-lg-8 margin-left-register">
                     <h1 class="login-heading mb-4 font-weight-bolder text-white">Register</h1>
-                    <form th:action="@{/users/register}" th:method="post" th:object="${model}"
+                    <form th:action="@{/users/register}" th:method="POST" th:object="${model}"
                           class="input-transparent">
                         <div class="form-label-group" th:classappend="${#fields.hasErrors('username')}? 'text-danger'">
                             <input required type="text" class="form-control" id="username"

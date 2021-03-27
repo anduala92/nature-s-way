@@ -3,11 +3,10 @@ package com.example.naturesway.domain.entities;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "event")
@@ -16,8 +15,7 @@ public class Event extends BaseEntity{
     private Date eventDate;
     private String location;
     private String programme;
-    private String username;
-    private Boolean favorite;
+    private Set<User> users;
 
     public Event() {
     }
@@ -63,19 +61,22 @@ public class Event extends BaseEntity{
         this.programme = programme;
     }
 
-    public String getUsername() {
-        return username;
+    @ManyToMany(targetEntity = User.class, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "events_users",
+            joinColumns = @JoinColumn(
+                    name = "event_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "users_id",
+                    referencedColumnName = "id"
+            )
+    )    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Boolean getFavorite() {
-        return favorite;
-    }
-
-    public void setFavorite(Boolean favorite) {
-        this.favorite = favorite;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

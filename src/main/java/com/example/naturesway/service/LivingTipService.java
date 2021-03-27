@@ -15,5 +15,5 @@ public interface LivingTipService {
 
     void editById(String id, LivingTipServiceModel livingTipServiceModel);
 
-    void updateEvent(LivingTipServiceModel livingTipServiceModel);
+    void updateLivingTip(LivingTipServiceModel livingTipServiceModel);
 }

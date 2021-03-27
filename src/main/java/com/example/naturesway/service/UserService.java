@@ -1,5 +1,6 @@
 package com.example.naturesway.service;
 
+import com.example.naturesway.domain.entities.User;
 import com.example.naturesway.domain.serviceModels.UserServiceModel;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -19,4 +20,6 @@ public interface UserService extends UserDetailsService {
     void setUserRole(String id, String role);
 
     void deleteUserById(String id);
+
+    User findByUsername(String username);
 }

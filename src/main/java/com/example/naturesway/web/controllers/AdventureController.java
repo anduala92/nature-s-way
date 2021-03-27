@@ -1,9 +1,13 @@
 package com.example.naturesway.web.controllers;
 
 import com.example.naturesway.domain.binding.AdventureAddBindingModel;
+import com.example.naturesway.domain.entities.Adventure;
+import com.example.naturesway.domain.entities.User;
 import com.example.naturesway.domain.serviceModels.AdventureServiceModel;
+import com.example.naturesway.domain.serviceModels.UserServiceModel;
 import com.example.naturesway.domain.viewModels.AdventureViewModel;
 import com.example.naturesway.service.AdventureService;
+import com.example.naturesway.service.UserService;
 import com.example.naturesway.utils.CloudinaryService;
 import com.example.naturesway.web.annotations.PageTitle;
 import org.modelmapper.ModelMapper;
@@ -18,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -27,13 +31,14 @@ public class AdventureController extends BaseController{
     private final AdventureService adventureService;
     private final ModelMapper mapper;
     private final CloudinaryService cloudinaryService;
-
+    private final UserService userService;
 
     @Autowired
-    public AdventureController(AdventureService adventureService, ModelMapper mapper, CloudinaryService cloudinaryService) {
+    public AdventureController(AdventureService adventureService, ModelMapper mapper, CloudinaryService cloudinaryService, UserService userService) {
         this.adventureService = adventureService;
         this.mapper = mapper;
         this.cloudinaryService = cloudinaryService;
+        this.userService = userService;
     }
 
     @GetMapping("/add")
@@ -81,8 +86,16 @@ public class AdventureController extends BaseController{
                 .stream()
                 .map(adventure -> mapper.map(adventure, AdventureViewModel.class))
                 .collect(Collectors.toList());
-        modelAndView.addObject("adventures", adventures);
 
+        String username = getCurrentUser();
+        for (AdventureViewModel adventure : adventures) {
+            for (UserServiceModel user : adventure.getUsers()) {
+                if (user.getUsername().equals(username)){
+                    adventure.setFavorite(true);
+                }
+            }
+        }
+        modelAndView.addObject("adventures", adventures);
         return view("adventure/adventure-guides", modelAndView);
     }
 
@@ -91,38 +104,55 @@ public class AdventureController extends BaseController{
     public ModelAndView addToFavorites(@PathVariable String id){
         AdventureServiceModel adventureServiceModel = adventureService.findById(id);
 
-        adventureServiceModel.setFavorite(true);
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username;
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-        adventureServiceModel.setUsername(username);
+        String username = getCurrentUser();
+        UserServiceModel userServiceModel = userService.findUserByUsername(username);
 
-        adventureService.updateAdventure(adventureServiceModel);
+        adventureServiceModel.getUsers().add(userServiceModel);
+
+        adventureService.saveAdventure(adventureServiceModel);
         return redirect("/adventures/adventure-guides");
     }
 
     @GetMapping("/favorites")
     @PreAuthorize("hasRole('ROLE_USER')")
-    @PageTitle("Adventure Guides")
+    @PageTitle("Favorite Adventures")
     public ModelAndView favoritesAdventures(ModelAndView modelAndView) {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username;
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-        List<AdventureViewModel> adventures = adventureService.findFavorites(username)
+        String username = getCurrentUser();
+        List<AdventureViewModel> adventures = adventureService.findAll()
                 .stream()
                 .map(adventure -> mapper.map(adventure, AdventureViewModel.class))
                 .collect(Collectors.toList());
-        modelAndView.addObject("adventures", adventures);
+
+        List<AdventureViewModel> favoriteAdventures = new ArrayList<>();
+
+        for (AdventureViewModel adventure : adventures) {
+            for (UserServiceModel adventureUser : adventure.getUsers()) {
+                if (adventureUser.getUsername().equals(username)){
+                    favoriteAdventures.add(adventure);
+                }
+            }
+        }
+        modelAndView.addObject("adventures", favoriteAdventures);
 
         return view("favorites/adventures", modelAndView);
+    }
+
+    @GetMapping ("/favorites/remove/{id}")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ModelAndView removeFromFavorites(@PathVariable String id){
+        AdventureServiceModel adventureServiceModel = adventureService.findById(id);
+
+        String username = getCurrentUser();
+
+        Set<UserServiceModel> filteredUsers = new HashSet<>();
+        for (UserServiceModel user : adventureServiceModel.getUsers()) {
+            if (!user.getUsername().equals(username)){
+                filteredUsers.add(user);
+            }
+        }
+        adventureServiceModel.setUsers(filteredUsers);
+        adventureService.saveAdventure(adventureServiceModel);
+        return redirect("/adventures/favorites");
     }
 
     @GetMapping("/edit/{id}")
@@ -154,5 +184,16 @@ public class AdventureController extends BaseController{
     public ModelAndView delete(@PathVariable String id){
         adventureService.deleteAdventureById(id);
         return redirect("/adventures/all");
+    }
+
+    private String getCurrentUser() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        return username;
     }
 }

@@ -1,10 +1,10 @@
 package com.example.naturesway.domain.serviceModels;
 
 import com.example.naturesway.domain.enumerations.AdventureCategoryEnum;
-import org.springframework.web.multipart.MultipartFile;
 
-public class AdventureServiceModel {
-    private String id;
+import java.util.Set;
+
+public class AdventureServiceModel extends BaseServiceModel{
     private String name;
     private AdventureCategoryEnum category;
     private String country;
@@ -14,18 +14,10 @@ public class AdventureServiceModel {
     private String duration;
     private String description;
     private String imageUrl;
-    private String username;
-    private Boolean favorite;
+    private Set<UserServiceModel> users;
+
 
     public AdventureServiceModel() {
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -100,19 +92,11 @@ public class AdventureServiceModel {
         this.imageUrl = imageUrl;
     }
 
-    public String getUsername() {
-        return username;
+    public Set<UserServiceModel> getUsers() {
+        return users;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Boolean getFavorite() {
-        return favorite;
-    }
-
-    public void setFavorite(Boolean favorite) {
-        this.favorite = favorite;
+    public void setUsers(Set<UserServiceModel> users) {
+        this.users = users;
     }
 }
