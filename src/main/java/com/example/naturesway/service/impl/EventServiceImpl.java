@@ -3,6 +3,8 @@ package com.example.naturesway.service.impl;
 import com.example.naturesway.domain.entities.Adventure;
 import com.example.naturesway.domain.entities.Event;
 import com.example.naturesway.domain.serviceModels.EventServiceModel;
+import com.example.naturesway.error.AdventureAlreadyExistException;
+import com.example.naturesway.error.EventAlreadyExistException;
 import com.example.naturesway.error.RecordNotFoundException;
 import com.example.naturesway.repository.EventRepository;
 import com.example.naturesway.service.EventService;
@@ -12,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.example.naturesway.constants.Constants.INCORRECT_ID;
+import static com.example.naturesway.constants.Constants.*;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -27,6 +29,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public void addEvent(EventServiceModel eventServiceModel) {
         Event event = mapper.map(eventServiceModel,Event.class);
+        checkIfEventExistByName(event.getName());
         eventRepository.save(event);
     }
 
@@ -72,5 +75,13 @@ public class EventServiceImpl implements EventService {
     private Event getEventById(String id){
         return eventRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException(INCORRECT_ID));
+    }
+
+    private void checkIfEventExistByName(String eventName) {
+        Event eventInDb = eventRepository.findByName(eventName).orElse(null);
+
+        if (eventInDb != null) {
+            throw new EventAlreadyExistException(DUPLICATE_EVENT);
+        }
     }
 }

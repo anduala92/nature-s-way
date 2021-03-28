@@ -4,6 +4,8 @@ import com.example.naturesway.domain.entities.Event;
 import com.example.naturesway.domain.entities.LivingTip;
 import com.example.naturesway.domain.serviceModels.EventServiceModel;
 import com.example.naturesway.domain.serviceModels.LivingTipServiceModel;
+import com.example.naturesway.error.EventAlreadyExistException;
+import com.example.naturesway.error.LivingTipAlreadyExistException;
 import com.example.naturesway.error.RecordNotFoundException;
 import com.example.naturesway.repository.LivingTipRepository;
 import com.example.naturesway.service.LivingTipService;
@@ -13,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.example.naturesway.constants.Constants.INCORRECT_ID;
+import static com.example.naturesway.constants.Constants.*;
 
 @Service
 public class LivingTipServiceImpl implements LivingTipService {
@@ -28,6 +30,7 @@ public class LivingTipServiceImpl implements LivingTipService {
     @Override
     public void addLivingTip(LivingTipServiceModel livingTipServiceModel) {
         LivingTip livingTip = mapper.map(livingTipServiceModel, LivingTip.class);
+        checkIfLivingTipExistByName(livingTip.getName());
         livingTipRepository.save(livingTip);
     }
 
@@ -77,5 +80,13 @@ public class LivingTipServiceImpl implements LivingTipService {
     private LivingTip getLivingTipId(String id){
         return livingTipRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException(INCORRECT_ID));
+    }
+
+    private void checkIfLivingTipExistByName(String livingTipName) {
+        LivingTip livingTipInDb = livingTipRepository.findByName(livingTipName).orElse(null);
+
+        if (livingTipInDb != null) {
+            throw new LivingTipAlreadyExistException(DUPLICATE_LIVING_TIP);
+        }
     }
 }

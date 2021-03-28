@@ -81,7 +81,7 @@ public class Adventure extends BaseEntity{
     }
 
     @Column(name = "duration", nullable = false)
-    @Size(min = 3, max = 50)
+    @Size(min = 3)
     public String getDuration() {
         return duration;
     }

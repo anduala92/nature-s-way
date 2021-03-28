@@ -21,21 +21,17 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({RecordNotFoundException.class,
             UserNotFoundException.class,
             AuthorityNotFoundException.class,
-            BicycleSizeNotFoundException.class,
-            CategoryNotFoundException.class,
-            ComponentNotFoundException.class,
-            PasswordDontMatchException.class,
-            OrderNotFoundException.class})
+            PasswordDontMatchException.class})
     public ModelAndView handleNotFoundExceptions(BaseException e) {
         e.printStackTrace();
         return fillModelAndView(e.getStatus(), e.getMessage());
     }
 
     @ExceptionHandler({UsernameAlreadyExistException.class,
-            EmailAlreadyExistException.class,
-            BicycleAlreadyExistException.class,
-            CategoryAlreadyExistException.class,
-            BicycleSizeAlreadyExistException.class})
+            LivingTipAlreadyExistException.class,
+            EventAlreadyExistException.class,
+            AdventureAlreadyExistException.class,
+            EmailAlreadyExistException.class})
     public ModelAndView handleAlreadyExistExceptions(BaseException e) {
         e.printStackTrace();
         return fillModelAndView(e.getStatus(), e.getMessage());

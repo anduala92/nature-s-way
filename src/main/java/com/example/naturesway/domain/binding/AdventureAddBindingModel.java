@@ -7,7 +7,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
+
+import static com.example.naturesway.constants.Constants.*;
 
 public class AdventureAddBindingModel {
     private String id;
@@ -32,10 +34,9 @@ public class AdventureAddBindingModel {
         this.id = id;
     }
 
-    //todo replace messages with static tets
-    @NotNull
-    @NotEmpty
-    @Length(min = 3, max = 30, message = "ggg")
+    @NotNull(message = NULL_ADVENTURE_NAME_MESSAGE)
+    @NotEmpty(message = EMPTY_ADVENTURE_NAME_MESSAGE)
+    @Length(min = 3, max = 30, message = INVALID_ADVENTURE_NAME_MESSAGE)
     public String getName() {
         return name;
     }
@@ -53,9 +54,9 @@ public class AdventureAddBindingModel {
         this.category = category;
     }
 
-    @NotNull
-    @NotEmpty
-    @Length(min = 3, max = 30, message = "ggg")
+    @NotNull(message = NULL_ADVENTURE_CATEGORY_MESSAGE)
+    @NotEmpty(message = EMPTY_ADVENTURE_CATEGORY_MESSAGE)
+    @Length(min = 3, max = 30, message = INVALID_ADVENTURE_CATEGORY_MESSAGE)
     public String getCountry() {
         return country;
     }
@@ -64,8 +65,8 @@ public class AdventureAddBindingModel {
         this.country = country;
     }
 
-    @NotNull
-    @Range(min = 1,max = 3,message = "Level must me be at less equals to 1.")
+    @NotNull(message = NULL_ADVENTURE_LEVEL_MESSAGE)
+    @Range(min = 1,max = 3,message = INVALID_ADVENTURE_LEVEL_MESSAGE)
     public Integer getLevel() {
         return level;
     }
@@ -74,8 +75,8 @@ public class AdventureAddBindingModel {
         this.level = level;
     }
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = NULL_ADVENTURE_TIPS_MESSAGE)
+    @NotEmpty(message = EMPTY_ADVENTURE_TIPS_MESSAGE)
     public String getTips() {
         return tips;
     }
@@ -84,8 +85,8 @@ public class AdventureAddBindingModel {
         this.tips = tips;
     }
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = NULL_ADVENTURE_REQUIRED_EQUIPMENT_MESSAGE)
+    @NotEmpty(message = EMPTY_ADVENTURE_REQUIRED_EQUIPMENT_MESSAGE)
     public String getRequiredEquipment() {
         return requiredEquipment;
     }
@@ -94,9 +95,9 @@ public class AdventureAddBindingModel {
         this.requiredEquipment = requiredEquipment;
     }
 
-    @NotNull
-    @NotEmpty
-    @Length(min = 3, max = 50, message = "ggg")
+    @NotNull(message = NULL_ADVENTURE_DURATION_MESSAGE)
+    @NotEmpty(message = EMPTY_ADVENTURE_DURATION_MESSAGE)
+    @Length(min = 3, message = INVALID_ADVENTURE_DURATION_MESSAGE)
     public String getDuration() {
         return duration;
     }
@@ -105,9 +106,9 @@ public class AdventureAddBindingModel {
         this.duration = duration;
     }
 
-    @NotNull
-    @NotEmpty
-    @Length(min = 3, message = "ggg")
+    @NotNull(message = NULL_ADVENTURE_DESCRIPTION_MESSAGE)
+    @NotEmpty(message = EMPTY_ADVENTURE_DESCRIPTION_MESSAGE)
+    @Length(min = 3, message = INVALID_ADVENTURE_DESCRIPTION_MESSAGE)
     public String getDescription() {
         return description;
     }

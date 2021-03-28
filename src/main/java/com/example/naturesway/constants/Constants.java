@@ -12,19 +12,16 @@ public final class Constants {
     public static final String USERNAME_NOT_FOUND = "Username not found!";
     public static final String PASSWORDS_DONT_MATCH = "Old password dont match current password!";
     public static final String INCORRECT_ID = "Incorrect id!";
-    public static final String INCORRECT_CATEGORY = "Incorrect category name!";
-    public static final String INCORRECT_BICYCLE_SIZE = "Incorrect bicycle size name!";
     public static final String INCORRECT_AUTHORITY = "Incorrect authority name!";
-    public static final String INCORRECT_ORDER = "Incorrect order id!";
 
     public static final String DUPLICATE_USERNAME = "Username already exist!";
     public static final String DUPLICATE_EMAIL = "Email already exist!";
-    public static final String DUPLICATE_BICYCLE = "Bicycle already exist!";
-    public static final String DUPLICATE_CATEGORY = "Category already exist!";
-    public static final String DUPLICATE_BICYCLE_SIZE = "Bicycle size already exist!";
+    public static final String DUPLICATE_ADVENTURE= "Adventure already exist!";
+    public static final String DUPLICATE_EVENT = "Category already exist!";
+    public static final String DUPLICATE_LIVING_TIP = "Bicycle size already exist!";
 
     //LocalDateTime format pattern
-    public static final String DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    public static final String DATE_PATTERN = "yyyy-MM-dd";
 
     //validation
     public static final String EMAIL_PATTERN_STRING ="^((\"[\\w-\\s]+\")|([\\w-]+(?:\\.[\\w-]+)*)|(\"[\\w-\\s]+\")([\\w-]+(?:\\.[\\w-]+)*))(@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$)|(@\\[?((25[0-5]\\.|2[0-4][0-9]\\.|1[0-9]{2}\\.|[0-9]{1,2}\\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\\]?$)";
@@ -50,58 +47,58 @@ public final class Constants {
     public static final String NULL_LAST_NAME_MESSAGE = "Last name cannot be null.";
     public static final String EMPTY_LAST_NAME_MESSAGE = "Last name cannot be empty.";
 
-    public static final String INVALID_CATEGORY_LENGTH_MESSAGE = "Category must be between 2 and 15 symbols long.";
-    public static final String INVALID_CATEGORY_CAPITAL_CASE_MESSAGE = "Category must be only with capital letters.";
-    public static final String NULL_CATEGORY_MESSAGE = "Category cannot be null.";
-    public static final String EMPTY_CATEGORY_MESSAGE = "Category cannot be empty.";
+    public static final String NULL_ADVENTURE_NAME_MESSAGE = "Adventure name cannot be null.";
+    public static final String EMPTY_ADVENTURE_NAME_MESSAGE = "Adventure name cannot be empty.";
+    public static final String INVALID_ADVENTURE_NAME_MESSAGE = "Adventure name must be between 3 and 30 characters long.";
 
-    public static final String INVALID_BICYCLE_SIZE_LENGTH_MESSAGE = "Bicycle size must be max 2 letters.";
-    public static final String INVALID_BICYCLE_SIZE_CAPITAL_CASE_MESSAGE = "Bicycle size must be only with capital letters.";
-    public static final String NULL_BICYCLE_SIZE_MESSAGE = "Bicycle size cannot be null.";
-    public static final String EMPTY_BICYCLE_SIZE_MESSAGE = "Bicycle size cannot be empty.";
+    public static final String NULL_ADVENTURE_CATEGORY_MESSAGE = "Adventure category cannot be null.";
+    public static final String EMPTY_ADVENTURE_CATEGORY_MESSAGE = "Adventure category cannot be empty.";
+    public static final String INVALID_ADVENTURE_CATEGORY_MESSAGE = "Adventure category must be between 3 and 30 characters long.";
 
-    public static final String NULL_BICYCLE_MAKE_MESSAGE = "Make cannot be null.";
-    public static final String EMPTY_BICYCLE_MAKE_MESSAGE = "Make cannot be empty.";
+    public static final String NULL_ADVENTURE_LEVEL_MESSAGE = "Adventure level cannot be null.";
+    public static final String INVALID_ADVENTURE_LEVEL_MESSAGE = "Adventure level must be not less than 1 and not higher from 3.";
 
-    public static final String NULL_BICYCLE_MODEL_MESSAGE = "Model cannot be null.";
-    public static final String EMPTY_BICYCLE_MODEL_MESSAGE = "Model cannot be empty.";
+    public static final String NULL_ADVENTURE_TIPS_MESSAGE = "Adventure tips cannot be null.";
+    public static final String EMPTY_ADVENTURE_TIPS_MESSAGE = "Adventure tips cannot be empty.";
 
-    public static final String NULL_BICYCLE_DESCRIPTION_MESSAGE = "Description cannot be null.";
-    public static final String EMPTY_BICYCLE_DESCRIPTION_MESSAGE = "Description cannot be empty.";
+    public static final String NULL_ADVENTURE_REQUIRED_EQUIPMENT_MESSAGE = "Adventure required equipment cannot be null.";
+    public static final String EMPTY_ADVENTURE_REQUIRED_EQUIPMENT_MESSAGE = "Adventure required equipment cannot be empty.";
 
-    public static final String NULL_BICYCLE_COLOR_MESSAGE = "Color cannot be null.";
-    public static final String EMPTY_BICYCLE_COLOR_MESSAGE = "Color cannot be empty.";
+    public static final String NULL_ADVENTURE_DURATION_MESSAGE = "Adventure duration cannot be null.";
+    public static final String EMPTY_ADVENTURE_DURATION_MESSAGE = "Adventure duration cannot be empty.";
+    public static final String INVALID_ADVENTURE_DURATION_MESSAGE = "Adventure duration must be at less 3 characters long.";
 
-    public static final String NULL_BICYCLE_PRICE_MESSAGE = "Price cannot be null.";
-    public static final String MIN_BICYCLE_PRICE_MESSAGE = "The value must be positive.";
+    public static final String NULL_ADVENTURE_DESCRIPTION_MESSAGE = "Adventure description cannot be null.";
+    public static final String EMPTY_ADVENTURE_DESCRIPTION_MESSAGE = "Adventure description cannot be empty.";
+    public static final String INVALID_ADVENTURE_DESCRIPTION_MESSAGE = "Adventure description must be at less 3 characters long.";
 
-    public static final String NULL_BICYCLE_IMAGE_MESSAGE = "Image cannot be null.";
+    public static final String NULL_EVENT_NAME_MESSAGE = "Event name cannot be null.";
+    public static final String EMPTY_EVENT_NAME_MESSAGE = "Event name cannot be empty.";
+    public static final String INVALID_EVENT_NAME_MESSAGE = "Event name must be between 3 and 30 characters long.";
 
-    public static final String INVALID_BICYCLE_FRAME_LENGTH_MESSAGE = "Bicycle frame description must be between 1 and 255 characters long.";
-    public static final String NULL_BICYCLE_FRAME_MESSAGE = "Frame cannot be null.";
-    public static final String EMPTY_BICYCLE_FRAME_MESSAGE = "Frame cannot be empty.";
+    public static final String NULL_EVENT_DATE_MESSAGE = "Event date cannot be null.";
+    public static final String FUTURE_OR_PRESENT_EVENT_DATE_MESSAGE = "The event date cannot be in the past!";
 
-    public static final String INVALID_BICYCLE_FORK_LENGTH_MESSAGE = "Bicycle fork description must be between 1 and 255 characters long.";
-    public static final String NULL_BICYCLE_FORK_MESSAGE = "Fork cannot be null.";
-    public static final String EMPTY_BICYCLE_FORK_MESSAGE = "Fork cannot be empty.";
+    public static final String NULL_EVENT_LOCATION_MESSAGE = "Event location cannot be null.";
+    public static final String EMPTY_EVENT_LOCATION_MESSAGE = "Event location cannot be empty.";
+    public static final String INVALID_EVENT_LOCATION_MESSAGE = "Event location must be between 3 and 30 characters long.";
 
-    public static final String INVALID_BICYCLE_BREAKS_LENGTH_MESSAGE = "Bicycle breaks description must be between 1 and 255 characters long.";
-    public static final String NULL_BICYCLE_BREAKS_MESSAGE = "Breaks cannot be null.";
-    public static final String EMPTY_BICYCLE_BREAKS_MESSAGE = "Breaks cannot be empty.";
+    public static final String NULL_EVENT_PROGRAMME_MESSAGE = "Event location cannot be null.";
+    public static final String EMPTY_EVENT_PROGRAMME_MESSAGE = "Event location cannot be empty.";
+    public static final String INVALID_EVENT_PROGRAMME_MESSAGE = "Event location must be at less 3 characters long.";
 
-    public static final String INVALID_BICYCLE_SEAT_LENGTH_MESSAGE = "Bicycle seat description must be between 1 and 255 characters long.";
-    public static final String NULL_BICYCLE_SEAT_MESSAGE = "Seat cannot be null.";
-    public static final String EMPTY_BICYCLE_SEAT_MESSAGE = "Seat cannot be empty.";
+    public static final String NULL_LIVING_TIP_NAME_MESSAGE = "Living Tip name cannot be null.";
+    public static final String EMPTY_LIVING_TIP_NAME_MESSAGE = "Living Tip name cannot be empty.";
+    public static final String INVALID_LIVING_TIP_NAME_MESSAGE = "Living Tip name must be between 3 and 30 characters long.";
 
-    public static final String INVALID_BICYCLE_TYRES_LENGTH_MESSAGE = "Bicycle tyres description must be between 1 and 255 characters long.";
-    public static final String NULL_BICYCLE_TYRES_MESSAGE = "Tyres cannot be null.";
-    public static final String EMPTY_BICYCLE_TYRES_MESSAGE = "Tyres cannot be empty.";
+    public static final String NULL_LIVING_CATEGORY_MESSAGE = "Living Tip category cannot be null.";
 
-    public static final String INVALID_COMPONENT_LENGTH_MESSAGE = "Component description must be between 1 and 255 characters long.";
-    public static final String NULL_COMPONENT_MESSAGE = "Component cannot be null.";
-    public static final String EMPTY_COMPONENT_MESSAGE = "Component cannot be empty.";
+    public static final String NULL_LIVING_TIP_DESCRIPTION_MESSAGE = "Living Tip description cannot be null.";
+    public static final String EMPTY_LIVING_TIP_DESCRIPTION_MESSAGE = "Living Tip description cannot be empty.";
+    public static final String INVALID_LIVING_TIP_DESCRIPTION_MESSAGE = "Living Tip description must be at less 3 characters long.";
 
-    public static final String NULL_ORDER_QUANTITY_MESSAGE = "Quantity cannot be null.";
-    public static final String MIN_ORDER_QUANTITY_MESSAGE = "The quantity must be at least 1.";
-    public static final String MAX_ORDER_QUANTITY_MESSAGE = "The quantity must be maximum 100.";
+    public static final String NULL_LIVING_TIP_USABILITY_MESSAGE = "Living Tip usability cannot be null.";
+    public static final String EMPTY_LIVING_TIP_USABILITY_MESSAGE = "Living Tip usability cannot be empty.";
+    public static final String INVALID_LIVING_TIP_USABILITY_MESSAGE = "Living Tip usability must be at less 3 characters long.";
+
 }

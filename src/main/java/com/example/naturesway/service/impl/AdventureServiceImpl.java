@@ -1,8 +1,12 @@
 package com.example.naturesway.service.impl;
 
 import com.example.naturesway.domain.entities.Adventure;
+import com.example.naturesway.domain.entities.User;
 import com.example.naturesway.domain.serviceModels.AdventureServiceModel;
+import com.example.naturesway.error.AdventureAlreadyExistException;
+import com.example.naturesway.error.EmailAlreadyExistException;
 import com.example.naturesway.error.RecordNotFoundException;
+import com.example.naturesway.error.UsernameAlreadyExistException;
 import com.example.naturesway.repository.AdventureRepository;
 import com.example.naturesway.service.AdventureService;
 import org.modelmapper.ModelMapper;
@@ -11,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import static com.example.naturesway.constants.Constants.INCORRECT_ID;
+import static com.example.naturesway.constants.Constants.*;
 
 @Service
 public class AdventureServiceImpl implements AdventureService {
@@ -26,6 +30,7 @@ public class AdventureServiceImpl implements AdventureService {
     @Override
     public void addAdventure(AdventureServiceModel adventureServiceModel) {
         Adventure adventure = mapper.map(adventureServiceModel,Adventure.class);
+        checkIfAdventureExistByName(adventure.getName());
         adventureRepository.save(adventure);
     }
 
@@ -80,5 +85,14 @@ public class AdventureServiceImpl implements AdventureService {
     private Adventure getAdventureById(String id){
         return adventureRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException(INCORRECT_ID));
+    }
+
+    private void checkIfAdventureExistByName(String adventureName) {
+        Adventure adventureInDb = adventureRepository.findByName(adventureName).orElse(null);
+
+        if (adventureInDb != null) {
+            throw new AdventureAlreadyExistException(DUPLICATE_ADVENTURE);
+        }
+
     }
 }

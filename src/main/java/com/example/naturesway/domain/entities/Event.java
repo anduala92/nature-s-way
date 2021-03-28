@@ -1,5 +1,6 @@
 package com.example.naturesway.domain.entities;
 
+import com.example.naturesway.constants.Constants;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -32,7 +33,7 @@ public class Event extends BaseEntity{
 
     @Column(name = "event_date",  nullable = false)
     @Type(type="date")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = Constants.DATE_PATTERN)
     public Date getEventDate() {
         return eventDate;
     }
@@ -52,7 +53,7 @@ public class Event extends BaseEntity{
     }
 
     @Column(name = "programme", nullable = false)
-    @Size(min = 3, max = 30)
+    @Size(min = 3)
     public String getProgramme() {
         return programme;
     }

@@ -10,7 +10,6 @@ import static com.example.naturesway.constants.Constants.*;
 
 
 public class UserEditBindingModel {
-
     private String username;
     private String firstName;
     private String lastName;

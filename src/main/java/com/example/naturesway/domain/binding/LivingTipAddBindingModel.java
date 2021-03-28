@@ -6,6 +6,8 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import static com.example.naturesway.constants.Constants.*;
+
 public class LivingTipAddBindingModel {
     private String id;
     private String name;
@@ -24,10 +26,11 @@ public class LivingTipAddBindingModel {
         this.id = id;
     }
 
-    //todo replace messages with static texts
-    @NotNull
-    @NotEmpty
-    @Length(min = 3, max = 30, message = "ggg")
+
+
+    @NotNull(message = NULL_LIVING_TIP_NAME_MESSAGE)
+    @NotEmpty(message = EMPTY_LIVING_TIP_NAME_MESSAGE)
+    @Length(min = 3, max = 30, message = INVALID_LIVING_TIP_NAME_MESSAGE)
     public String getName() {
         return name;
     }
@@ -36,7 +39,7 @@ public class LivingTipAddBindingModel {
         this.name = name;
     }
 
-    @NotNull
+    @NotNull(message = NULL_LIVING_CATEGORY_MESSAGE)
     public LivingTipEnum getCategory() {
         return category;
     }
@@ -45,9 +48,9 @@ public class LivingTipAddBindingModel {
         this.category = category;
     }
 
-    @NotNull
-    @NotEmpty
-    @Length(min = 3, message = "ggg")
+    @NotNull(message = NULL_LIVING_TIP_DESCRIPTION_MESSAGE)
+    @NotEmpty(message = EMPTY_LIVING_TIP_DESCRIPTION_MESSAGE)
+    @Length(min = 3, message = INVALID_LIVING_TIP_DESCRIPTION_MESSAGE)
     public String getDescription() {
         return description;
     }
@@ -56,9 +59,9 @@ public class LivingTipAddBindingModel {
         this.description = description;
     }
 
-    @NotNull
-    @NotEmpty
-    @Length(min = 3, message = "ggg")
+    @NotNull(message = NULL_LIVING_TIP_USABILITY_MESSAGE)
+    @NotEmpty(message = EMPTY_LIVING_TIP_USABILITY_MESSAGE)
+    @Length(min = 3, message = INVALID_LIVING_TIP_USABILITY_MESSAGE)
     public String getUsability() {
         return usability;
     }

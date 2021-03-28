@@ -8,6 +8,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+import static com.example.naturesway.constants.Constants.*;
+
+
 public class EventBindingModel {
     private String id;
     private String name;
@@ -26,9 +29,9 @@ public class EventBindingModel {
         this.id = id;
     }
 
-    @NotNull
-    @NotEmpty
-    @Length(min = 3, max = 30, message = "ggg")
+    @NotNull(message = NULL_EVENT_NAME_MESSAGE)
+    @NotEmpty(message = EMPTY_EVENT_NAME_MESSAGE)
+    @Length(min = 3, max = 30, message = INVALID_EVENT_NAME_MESSAGE)
     public String getName() {
         return name;
     }
@@ -37,9 +40,9 @@ public class EventBindingModel {
         this.name = name;
     }
 
-    @NotNull(message = "Event Date can't be null")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @FutureOrPresent(message = "The event date cannot be in the past!")
+    @NotNull(message = NULL_EVENT_DATE_MESSAGE)
+    @DateTimeFormat(pattern = DATE_PATTERN)
+    @FutureOrPresent(message = FUTURE_OR_PRESENT_EVENT_DATE_MESSAGE)
     public Date getEventDate() {
         return eventDate;
     }
@@ -48,9 +51,9 @@ public class EventBindingModel {
         this.eventDate = eventDate;
     }
 
-    @NotNull
-    @NotEmpty
-    @Length(min = 3, max = 30, message = "ggg")
+    @NotNull(message = NULL_EVENT_LOCATION_MESSAGE)
+    @NotEmpty(message = EMPTY_EVENT_LOCATION_MESSAGE)
+    @Length(min = 3, max = 30, message = INVALID_EVENT_LOCATION_MESSAGE)
     public String getLocation() {
         return location;
     }
@@ -59,9 +62,9 @@ public class EventBindingModel {
         this.location = location;
     }
 
-    @NotNull
-    @NotEmpty
-    @Length(min = 3, max = 30, message = "ggg")
+    @NotNull(message = NULL_EVENT_PROGRAMME_MESSAGE)
+    @NotEmpty(message = EMPTY_EVENT_PROGRAMME_MESSAGE)
+    @Length(min = 3, message = INVALID_EVENT_PROGRAMME_MESSAGE)
     public String getProgramme() {
         return programme;
     }
