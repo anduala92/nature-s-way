@@ -1,24 +1,22 @@
 <th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
-
     <div class="navbar-header ml-3">
         <a class="navbar-brand font-weight-bold mt-1 text-light" th:href="@{/home}">
             <img class="mb-1" th:src="@{/images/natures-way-logo.png}" th:width="35" th:height="32" alt="header logo"/> Nature's Way
         </a>
     </div>
     <div class="collapse navbar-collapse flex-column text-dark" id="userNav">
-        <!--                First line-->
         <ul class="navbar-nav w-100 px-3 justify-content-start">
             <li class="nav-item active font-weight-bold">
-                <a class="nav-link" th:href="@{/adventures/adventure-guides}">Adventure Guides</a>
+                <a class="nav-link text-light" th:href="@{/adventures/adventure-guides}">Adventure Guides</a>
             </li>
             <li class="nav-item active font-weight-bold">
-                <a class="nav-link" th:href="@{/living-tips/living-tips}">Living Tips</a>
+                <a class="nav-link text-light" th:href="@{/living-tips/living-tips}">Living Tips</a>
             </li>
             <li class="nav-item active font-weight-bold">
-                <a class="nav-link" th:href="@{/events/upcoming-events}">Upcoming Events</a>
+                <a class="nav-link text-light" th:href="@{/events/upcoming-events}">Upcoming Events</a>
             </li>
             <li class="nav-item active font-weight-bold">
-                <a class="nav-link" th:href="@{/error}">Surprise</a>
+                <a class="nav-link text-light" th:href="@{/error}">Surprise</a>
             </li>
         </ul>
     </div>
@@ -34,7 +32,7 @@
             </li>
 
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{/users/profile}">
+                <a class="nav-link text-light" th:href="@{/users/profile}">
                     <img class="mb-1" th:src="@{/images/register-account-logo.png}" th:width="18" th:height="18"
                          alt="register logo"/> Profile</a>
             </li>
@@ -98,13 +96,4 @@
             </li>
         </ul>
     </div>
-    <script>
-        fetch('/categories/fetch')
-            .then((response) => response.json())
-            .then((json) => {
-                json.forEach((category) => $('#categoryNav')
-                    .append(`<a class="dropdown-item font-weight-bold" href="/bicycles/${category.name.toLowerCase()}">${category.name}</a>`));
-            })
-            .catch((err) => console.log(err));
-    </script>
 </th:block>

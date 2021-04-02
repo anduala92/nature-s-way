@@ -1,8 +1,6 @@
 package com.example.naturesway.web.controllers;
 
 import com.example.naturesway.domain.binding.AdventureAddBindingModel;
-import com.example.naturesway.domain.entities.Adventure;
-import com.example.naturesway.domain.entities.User;
 import com.example.naturesway.domain.serviceModels.AdventureServiceModel;
 import com.example.naturesway.domain.serviceModels.UserServiceModel;
 import com.example.naturesway.domain.viewModels.AdventureViewModel;

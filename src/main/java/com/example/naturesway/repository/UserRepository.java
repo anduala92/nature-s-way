@@ -1,6 +1,5 @@
 package com.example.naturesway.repository;
 
-import com.example.naturesway.domain.entities.Adventure;
 import com.example.naturesway.domain.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -254,10 +254,6 @@ The navbar toggle appears at this breakpoint */
     --input-padding-y: 0.75rem;
 }
 
-.login,
-.image {
-    min-height: 100vh;
-}
 
 .margin-left-register {
     margin-left: 120%;
@@ -399,6 +395,7 @@ The navbar toggle appears at this breakpoint */
 .input-transparent {
     opacity: 75%;
 }
+
 .dropdown-transparent {
     opacity: 92%;
 }

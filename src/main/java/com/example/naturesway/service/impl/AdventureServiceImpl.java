@@ -1,12 +1,9 @@
 package com.example.naturesway.service.impl;
 
 import com.example.naturesway.domain.entities.Adventure;
-import com.example.naturesway.domain.entities.User;
 import com.example.naturesway.domain.serviceModels.AdventureServiceModel;
 import com.example.naturesway.error.AdventureAlreadyExistException;
-import com.example.naturesway.error.EmailAlreadyExistException;
 import com.example.naturesway.error.RecordNotFoundException;
-import com.example.naturesway.error.UsernameAlreadyExistException;
 import com.example.naturesway.repository.AdventureRepository;
 import com.example.naturesway.service.AdventureService;
 import org.modelmapper.ModelMapper;

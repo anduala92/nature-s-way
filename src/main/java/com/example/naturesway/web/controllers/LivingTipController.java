@@ -1,10 +1,8 @@
 package com.example.naturesway.web.controllers;
 
 import com.example.naturesway.domain.binding.LivingTipAddBindingModel;
-import com.example.naturesway.domain.serviceModels.AdventureServiceModel;
 import com.example.naturesway.domain.serviceModels.LivingTipServiceModel;
 import com.example.naturesway.domain.serviceModels.UserServiceModel;
-import com.example.naturesway.domain.viewModels.AdventureViewModel;
 import com.example.naturesway.domain.viewModels.LivingTipViewModel;
 import com.example.naturesway.service.LivingTipService;
 import com.example.naturesway.service.UserService;

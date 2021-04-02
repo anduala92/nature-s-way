@@ -12,7 +12,7 @@
     <artifactId>natures-way</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>natures-way</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Nature's way with Spring Boot</description>
     <properties>
         <java.version>11</java.version>
     </properties>

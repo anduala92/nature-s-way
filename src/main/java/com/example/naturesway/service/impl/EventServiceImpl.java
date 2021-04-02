@@ -1,9 +1,7 @@
 package com.example.naturesway.service.impl;
 
-import com.example.naturesway.domain.entities.Adventure;
 import com.example.naturesway.domain.entities.Event;
 import com.example.naturesway.domain.serviceModels.EventServiceModel;
-import com.example.naturesway.error.AdventureAlreadyExistException;
 import com.example.naturesway.error.EventAlreadyExistException;
 import com.example.naturesway.error.RecordNotFoundException;
 import com.example.naturesway.repository.EventRepository;

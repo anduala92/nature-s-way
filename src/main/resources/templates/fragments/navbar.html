@@ -12,7 +12,6 @@
             <th:block th:include="~{fragments/nav-anonymous}"></th:block>
         </th:block>
 
-        <!--    LOG IN USER-->
         <th:block sec:authorize="isAuthenticated()">
             <th:block th:include="~{fragments/nav-authenticated}"></th:block>
         </th:block>

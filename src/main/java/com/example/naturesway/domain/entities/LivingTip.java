@@ -3,7 +3,6 @@ package com.example.naturesway.domain.entities;
 import com.example.naturesway.domain.enumerations.LivingTipEnum;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Set;
 

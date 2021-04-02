@@ -17,8 +17,8 @@ public final class Constants {
     public static final String DUPLICATE_USERNAME = "Username already exist!";
     public static final String DUPLICATE_EMAIL = "Email already exist!";
     public static final String DUPLICATE_ADVENTURE= "Adventure already exist!";
-    public static final String DUPLICATE_EVENT = "Category already exist!";
-    public static final String DUPLICATE_LIVING_TIP = "Bicycle size already exist!";
+    public static final String DUPLICATE_EVENT = "Event already exist!";
+    public static final String DUPLICATE_LIVING_TIP = "Living Tip already exist!";
 
     //LocalDateTime format pattern
     public static final String DATE_PATTERN = "yyyy-MM-dd";
