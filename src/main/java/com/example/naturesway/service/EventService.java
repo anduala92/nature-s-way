@@ -16,4 +16,5 @@ public interface EventService {
     void editById(String id, EventServiceModel eventServiceModel);
 
     void updateEvent(EventServiceModel eventServiceModel);
+
 }

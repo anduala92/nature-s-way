@@ -1,5 +1,6 @@
 package com.example.naturesway.service.impl;
 
+import com.example.naturesway.constants.Constants;
 import com.example.naturesway.domain.entities.Event;
 import com.example.naturesway.domain.serviceModels.EventServiceModel;
 import com.example.naturesway.error.EventAlreadyExistException;
@@ -7,8 +8,13 @@ import com.example.naturesway.error.RecordNotFoundException;
 import com.example.naturesway.repository.EventRepository;
 import com.example.naturesway.service.EventService;
 import org.modelmapper.ModelMapper;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,6 +70,20 @@ public class EventServiceImpl implements EventService {
     @Override
     public void updateEvent(EventServiceModel eventServiceModel) {
         eventRepository.save(mapper.map(eventServiceModel, Event.class));
+    }
+
+
+    @Scheduled(cron = "@midnight")
+    private void deletePastEvents() {
+        SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+        Date date = new Date(System.currentTimeMillis());
+        try {
+            date = ft.parse(LocalDate.now().toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        eventRepository.deleteAll(eventRepository.findAllPastEvents(date));
     }
 
     private EventServiceModel getEventServiceModel(Event event) {
