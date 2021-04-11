@@ -14,6 +14,4 @@ public interface LivingTipService {
     LivingTipServiceModel findById(String id);
 
     void editById(String id, LivingTipServiceModel livingTipServiceModel);
-
-    void updateLivingTip(LivingTipServiceModel livingTipServiceModel);
 }

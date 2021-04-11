@@ -1,9 +1,11 @@
 package com.example.naturesway.web.controllers;
 
 import com.example.naturesway.domain.binding.LivingTipAddBindingModel;
+import com.example.naturesway.domain.entities.LivingTip;
 import com.example.naturesway.domain.serviceModels.LivingTipServiceModel;
 import com.example.naturesway.domain.serviceModels.UserServiceModel;
 import com.example.naturesway.domain.viewModels.LivingTipViewModel;
+import com.example.naturesway.repository.LivingTipRepository;
 import com.example.naturesway.service.LivingTipService;
 import com.example.naturesway.service.UserService;
 import com.example.naturesway.web.annotations.PageTitle;
@@ -27,11 +29,13 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/living-tips")
 public class LivingTipController extends BaseController{
+    private final LivingTipRepository livingTipRepository;
     private final UserService userService;
     private final LivingTipService livingTipService;
     private final ModelMapper mapper;
 
-    public LivingTipController(UserService userService, LivingTipService livingTipService, ModelMapper mapper) {
+    public LivingTipController(LivingTipRepository livingTipRepository, UserService userService, LivingTipService livingTipService, ModelMapper mapper) {
+        this.livingTipRepository = livingTipRepository;
         this.userService = userService;
         this.livingTipService = livingTipService;
         this.mapper = mapper;
@@ -100,7 +104,7 @@ public class LivingTipController extends BaseController{
         String username = getCurrentUser();
         UserServiceModel userServiceModel = userService.findUserByUsername(username);
         livingTipServiceModel.getUsers().add(userServiceModel);
-        livingTipService.updateLivingTip(livingTipServiceModel);
+        livingTipRepository.save(mapper.map(livingTipServiceModel, LivingTip.class));
         return redirect("/living-tips/living-tips");
     }
 
@@ -143,7 +147,7 @@ public class LivingTipController extends BaseController{
             }
         }
         livingTipServiceModel.setUsers(filteredUsers);
-        livingTipService.updateLivingTip(livingTipServiceModel);
+        livingTipRepository.save(mapper.map(livingTipServiceModel, LivingTip.class));
         return redirect("/living-tips/favorites");
     }
 

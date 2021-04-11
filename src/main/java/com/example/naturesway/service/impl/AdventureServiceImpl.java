@@ -66,11 +66,6 @@ public class AdventureServiceImpl implements AdventureService {
         adventureRepository.save(adventure);
     }
 
-    @Override
-    public void saveAdventure(AdventureServiceModel adventureServiceModel) {
-        adventureRepository.save(mapper.map(adventureServiceModel,Adventure.class));
-    }
-
     private AdventureServiceModel getAdventureServiceModel(Adventure adventure) {
         AdventureServiceModel serviceModel = mapper.map(adventure, AdventureServiceModel.class);
 

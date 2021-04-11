@@ -1,9 +1,11 @@
 package com.example.naturesway.web.controllers;
 
 import com.example.naturesway.domain.binding.AdventureAddBindingModel;
+import com.example.naturesway.domain.entities.Adventure;
 import com.example.naturesway.domain.serviceModels.AdventureServiceModel;
 import com.example.naturesway.domain.serviceModels.UserServiceModel;
 import com.example.naturesway.domain.viewModels.AdventureViewModel;
+import com.example.naturesway.repository.AdventureRepository;
 import com.example.naturesway.service.AdventureService;
 import com.example.naturesway.service.UserService;
 import com.example.naturesway.utils.CloudinaryService;
@@ -26,13 +28,15 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/adventures")
 public class AdventureController extends BaseController{
+    private final AdventureRepository adventureRepository;
     private final AdventureService adventureService;
     private final ModelMapper mapper;
     private final CloudinaryService cloudinaryService;
     private final UserService userService;
 
     @Autowired
-    public AdventureController(AdventureService adventureService, ModelMapper mapper, CloudinaryService cloudinaryService, UserService userService) {
+    public AdventureController(AdventureRepository adventureRepository, AdventureService adventureService, ModelMapper mapper, CloudinaryService cloudinaryService, UserService userService) {
+        this.adventureRepository = adventureRepository;
         this.adventureService = adventureService;
         this.mapper = mapper;
         this.cloudinaryService = cloudinaryService;
@@ -104,10 +108,9 @@ public class AdventureController extends BaseController{
 
         String username = getCurrentUser();
         UserServiceModel userServiceModel = userService.findUserByUsername(username);
-
         adventureServiceModel.getUsers().add(userServiceModel);
 
-        adventureService.saveAdventure(adventureServiceModel);
+        adventureRepository.save(mapper.map(adventureServiceModel, Adventure.class));
         return redirect("/adventures/adventure-guides");
     }
 
@@ -149,7 +152,7 @@ public class AdventureController extends BaseController{
             }
         }
         adventureServiceModel.setUsers(filteredUsers);
-        adventureService.saveAdventure(adventureServiceModel);
+        adventureRepository.save(mapper.map(adventureServiceModel, Adventure.class));
         return redirect("/adventures/favorites");
     }
 

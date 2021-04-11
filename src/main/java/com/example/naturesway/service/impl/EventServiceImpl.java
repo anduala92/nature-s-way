@@ -1,6 +1,5 @@
 package com.example.naturesway.service.impl;
 
-import com.example.naturesway.constants.Constants;
 import com.example.naturesway.domain.entities.Event;
 import com.example.naturesway.domain.serviceModels.EventServiceModel;
 import com.example.naturesway.error.EventAlreadyExistException;
@@ -66,12 +65,6 @@ public class EventServiceImpl implements EventService {
 
         eventRepository.save(event);
     }
-
-    @Override
-    public void updateEvent(EventServiceModel eventServiceModel) {
-        eventRepository.save(mapper.map(eventServiceModel, Event.class));
-    }
-
 
     @Scheduled(cron = "@midnight")
     private void deletePastEvents() {

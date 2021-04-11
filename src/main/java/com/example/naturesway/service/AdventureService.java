@@ -14,7 +14,4 @@ public interface AdventureService {
     AdventureServiceModel findById(String id);
 
     void editById(String id, AdventureServiceModel adventureServiceModel);
-
-    void saveAdventure(AdventureServiceModel adventureServiceModel);
-
 }

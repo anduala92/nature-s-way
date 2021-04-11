@@ -25,7 +25,14 @@
                             <h3 class="h2">
                                 Something Went Wrong
                             </h3>
-                                <p th:text="${message}" style="color: red;"></p>
+                            <span th:if="${message != ''}">
+                                <span th:if="${message != 'No message available'}">
+                                    <p th:text="${message}" style="color: red;"></p>
+                                </span>
+                            </span>
+                            <span th:if="${message == 'No message available'}">
+                                <p th:text="ERROR" style="color: red;"></p>
+                            </span>
                         </div>
                     </div>
                 </div>

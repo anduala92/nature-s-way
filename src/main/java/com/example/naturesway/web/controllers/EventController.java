@@ -1,11 +1,11 @@
 package com.example.naturesway.web.controllers;
 
 import com.example.naturesway.domain.binding.EventBindingModel;
-import com.example.naturesway.domain.serviceModels.AdventureServiceModel;
+import com.example.naturesway.domain.entities.Event;
 import com.example.naturesway.domain.serviceModels.EventServiceModel;
 import com.example.naturesway.domain.serviceModels.UserServiceModel;
-import com.example.naturesway.domain.viewModels.AdventureViewModel;
 import com.example.naturesway.domain.viewModels.EventViewModel;
+import com.example.naturesway.repository.EventRepository;
 import com.example.naturesway.service.EventService;
 import com.example.naturesway.service.UserService;
 import com.example.naturesway.web.annotations.PageTitle;
@@ -29,11 +29,13 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/events")
 public class EventController extends BaseController{
+    private final EventRepository eventRepository;
     private final UserService userService;
     private final EventService eventService;
     private final ModelMapper mapper;
 
-    public EventController(UserService userService, EventService eventService, ModelMapper mapper) {
+    public EventController(EventRepository eventRepository, UserService userService, EventService eventService, ModelMapper mapper) {
+        this.eventRepository = eventRepository;
         this.userService = userService;
         this.eventService = eventService;
         this.mapper = mapper;
@@ -103,7 +105,7 @@ public class EventController extends BaseController{
         UserServiceModel userServiceModel = userService.findUserByUsername(username);
         eventServiceModel.getUsers().add(userServiceModel);
 
-        eventService.updateEvent(eventServiceModel);
+        eventRepository.save(mapper.map(eventServiceModel, Event.class));
         return redirect("/events/upcoming-events");
     }
 
@@ -146,7 +148,7 @@ public class EventController extends BaseController{
             }
         }
         eventServiceModel.setUsers(filteredUsers);
-        eventService.updateEvent(eventServiceModel);
+        eventRepository.save(mapper.map(eventServiceModel, Event.class));
         return redirect("/events/favorites");
     }
 
